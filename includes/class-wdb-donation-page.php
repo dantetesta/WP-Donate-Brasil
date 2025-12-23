@@ -1748,7 +1748,7 @@ class WDB_Donation_Page {
         
         ob_start();
         ?>
-        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="<?php echo esc_url(WDB_PLUGIN_URL . 'assets/css/tailwind.min.css'); ?>">
         <link rel="stylesheet" href="<?php echo esc_url(WDB_PLUGIN_URL . 'assets/css/fontawesome.min.css'); ?>">
         
         <style>
