@@ -1,0 +1,216 @@
+/**
+ * WP Donate Brasil - Admin Styles
+ * 
+ * @package WP_Donate_Brasil
+ * @author Dante Testa <https://dantetesta.com.br>
+ * @since 1.0.0
+ * @created 23/12/2025 09:21
+ */
+
+.wrap {
+    margin: 0;
+    padding: 0;
+}
+
+.wrap input[type="text"],
+.wrap input[type="email"],
+.wrap input[type="number"],
+.wrap input[type="tel"],
+.wrap input[type="color"],
+.wrap textarea,
+.wrap select {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.wrap input[type="color"] {
+    padding: 0;
+    border: 1px solid #d1d5db;
+    cursor: pointer;
+}
+
+.wrap .bg-white {
+    background-color: #fff;
+}
+
+.wrap table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.wrap table th,
+.wrap table td {
+    border: none;
+}
+
+.wrap table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.wrap table tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+.wrap .wdb-approve-btn,
+.wrap .wdb-reject-btn,
+.wrap .wdb-delete-btn {
+    transition: all 0.2s ease;
+}
+
+.wrap .wdb-approve-btn:hover {
+    background-color: rgba(16, 185, 129, 0.1);
+}
+
+.wrap .wdb-reject-btn:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+.wrap .wdb-delete-btn:hover {
+    background-color: rgba(107, 114, 128, 0.1);
+}
+
+#wdb-settings-message,
+#wdb-methods-message {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+#wdb-settings-message.success,
+#wdb-methods-message.success {
+    background-color: #D1FAE5;
+    color: #065F46;
+    border: 1px solid #A7F3D0;
+}
+
+#wdb-settings-message.error,
+#wdb-methods-message.error {
+    background-color: #FEE2E2;
+    color: #991B1B;
+    border: 1px solid #FECACA;
+}
+
+.wrap input:focus,
+.wrap textarea:focus,
+.wrap select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+.wrap input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.wrap input[type="checkbox"]:checked {
+    background-color: #3B82F6;
+    border-color: #3B82F6;
+}
+
+.wrap button.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.wrap button.loading i {
+    animation: wdbSpin 1s linear infinite;
+}
+
+@keyframes wdbSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@media (max-width: 782px) {
+    .wrap .max-w-4xl,
+    .wrap .max-w-6xl {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .wrap table {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    .wrap .grid {
+        gap: 1rem;
+    }
+}
+
+.wrap h1 {
+    padding: 0;
+    margin: 0;
+}
+
+.wrap form {
+    margin: 0;
+}
+
+.wrap a {
+    text-decoration: none;
+}
+
+.wrap a:focus {
+    box-shadow: none;
+}
+
+.wrap .pagination a {
+    transition: all 0.2s ease;
+}
+
+.wrap .status-pending {
+    background-color: #FEF3C7;
+    color: #92400E;
+}
+
+.wrap .status-approved {
+    background-color: #D1FAE5;
+    color: #065F46;
+}
+
+.wrap .status-rejected {
+    background-color: #FEE2E2;
+    color: #991B1B;
+}
+
+.wrap .filters a {
+    transition: all 0.2s ease;
+}
+
+.wrap .filters a:hover {
+    transform: translateY(-1px);
+}
+
+.wdb-toast {
+    position: fixed;
+    top: 50px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    z-index: 99999;
+    animation: wdbSlideIn 0.3s ease;
+}
+
+.wdb-toast.success {
+    background-color: #10B981;
+}
+
+.wdb-toast.error {
+    background-color: #EF4444;
+}
+
+@keyframes wdbSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

@@ -1,0 +1,159 @@
+# WP Donate Brasil - Brazilian Portuguese Translation
+# Copyright (C) 2025 Dante Testa
+# @author Dante Testa <https://dantetesta.com.br>
+# @since 1.0.0
+# @created 23/12/2025 09:21
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Donate Brasil 1.0.0\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "Copiado!"
+msgstr "Copiado!"
+
+msgid "Erro ao copiar"
+msgstr "Erro ao copiar"
+
+msgid "Enviando..."
+msgstr "Enviando..."
+
+msgid "Comprovante enviado com sucesso!"
+msgstr "Comprovante enviado com sucesso!"
+
+msgid "Erro ao enviar. Tente novamente."
+msgstr "Erro ao enviar. Tente novamente."
+
+msgid "Por favor, selecione um arquivo."
+msgstr "Por favor, selecione um arquivo."
+
+msgid "Tipo de arquivo não permitido."
+msgstr "Tipo de arquivo não permitido."
+
+msgid "Faça uma Doação"
+msgstr "Faça uma Doação"
+
+msgid "Enviar Comprovante"
+msgstr "Enviar Comprovante"
+
+msgid "Seu Nome"
+msgstr "Seu Nome"
+
+msgid "Seu E-mail"
+msgstr "Seu E-mail"
+
+msgid "Telefone (opcional)"
+msgstr "Telefone (opcional)"
+
+msgid "Valor da Doação (opcional)"
+msgstr "Valor da Doação (opcional)"
+
+msgid "Comprovante"
+msgstr "Comprovante"
+
+msgid "Formatos aceitos: JPG, PNG, GIF, PDF. Máximo 5MB."
+msgstr "Formatos aceitos: JPG, PNG, GIF, PDF. Máximo 5MB."
+
+msgid "Mensagem (opcional)"
+msgstr "Mensagem (opcional)"
+
+msgid "Deixe uma mensagem de apoio..."
+msgstr "Deixe uma mensagem de apoio..."
+
+msgid "Exibir na galeria de doadores"
+msgstr "Exibir na galeria de doadores"
+
+msgid "Doação anônima"
+msgstr "Doação anônima"
+
+msgid "Nossos Doadores"
+msgstr "Nossos Doadores"
+
+msgid "Doador Anônimo"
+msgstr "Doador Anônimo"
+
+msgid "Doações"
+msgstr "Doações"
+
+msgid "Configurações"
+msgstr "Configurações"
+
+msgid "Métodos"
+msgstr "Métodos"
+
+msgid "Comprovantes"
+msgstr "Comprovantes"
+
+msgid "Salvar Configurações"
+msgstr "Salvar Configurações"
+
+msgid "Métodos de Doação"
+msgstr "Métodos de Doação"
+
+msgid "Salvar Métodos"
+msgstr "Salvar Métodos"
+
+msgid "Comprovantes de Doação"
+msgstr "Comprovantes de Doação"
+
+msgid "Todos"
+msgstr "Todos"
+
+msgid "Pendentes"
+msgstr "Pendentes"
+
+msgid "Aprovados"
+msgstr "Aprovados"
+
+msgid "Rejeitados"
+msgstr "Rejeitados"
+
+msgid "Doador"
+msgstr "Doador"
+
+msgid "Método"
+msgstr "Método"
+
+msgid "Valor"
+msgstr "Valor"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Ações"
+msgstr "Ações"
+
+msgid "Pendente"
+msgstr "Pendente"
+
+msgid "Aprovado"
+msgstr "Aprovado"
+
+msgid "Rejeitado"
+msgstr "Rejeitado"
+
+msgid "Ver Comprovante"
+msgstr "Ver Comprovante"
+
+msgid "Aprovar"
+msgstr "Aprovar"
+
+msgid "Rejeitar"
+msgstr "Rejeitar"
+
+msgid "Excluir"
+msgstr "Excluir"
+
+msgid "Configurações salvas!"
+msgstr "Configurações salvas!"
+
+msgid "Métodos salvos!"
+msgstr "Métodos salvos!"
+
+msgid "Atualizações gerenciadas localmente"
+msgstr "Atualizações gerenciadas localmente"
