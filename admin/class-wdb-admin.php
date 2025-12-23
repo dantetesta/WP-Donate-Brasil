@@ -1864,16 +1864,16 @@ class WDB_Admin {
         );
         
         // Top doadores (por valor total + quantidade de doações) - apenas aprovados
+        // No admin mostra todos os doadores (incluindo anônimos) para controle interno
         $top_donors = $wpdb->get_results(
             "SELECT 
                 donor_name,
                 donor_email,
                 COUNT(*) as donation_count,
-                COALESCE(SUM(donation_amount), 0) as total_amount
+                COALESCE(SUM(donation_amount), 0) as total_amount,
+                MAX(anonymous) as is_anonymous
              FROM $table_name 
-             WHERE $where_date
-                   AND anonymous = 0
-                   AND status = 'approved'
+             WHERE status = 'approved'
              GROUP BY donor_email
              ORDER BY total_amount DESC, donation_count DESC
              LIMIT 10"
