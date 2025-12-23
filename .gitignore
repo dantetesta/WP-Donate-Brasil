@@ -1,0 +1,5 @@
+node_modules/
+tailwindcss-macos-arm64
+package-lock.json
+src/
+.DS_Store

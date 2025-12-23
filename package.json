@@ -1,0 +1,24 @@
+{
+  "name": "wp-donate-brasil",
+  "version": "1.0.0",
+  "description": "Sistema de doações para WordPress Brasil",
+  "scripts": {
+    "build": "./tailwindcss-macos-arm64 -i src/input.css -o assets/css/tailwind.min.css --minify",
+    "watch": "./tailwindcss-macos-arm64 -i src/input.css -o assets/css/tailwind.min.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dantetesta/WP-Donate-Brasil.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/dantetesta/WP-Donate-Brasil/issues"
+  },
+  "homepage": "https://github.com/dantetesta/WP-Donate-Brasil#readme",
+  "devDependencies": {
+    "tailwindcss": "^4.1.18"
+  }
+}
