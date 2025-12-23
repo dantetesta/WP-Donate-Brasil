@@ -1863,7 +1863,7 @@ class WDB_Admin {
              GROUP BY status"
         );
         
-        // Top doadores (por valor total + quantidade de doações)
+        // Top doadores (por valor total + quantidade de doações) - apenas aprovados
         $top_donors = $wpdb->get_results(
             "SELECT 
                 donor_name,
@@ -1873,6 +1873,7 @@ class WDB_Admin {
              FROM $table_name 
              WHERE $where_date
                    AND anonymous = 0
+                   AND status = 'approved'
              GROUP BY donor_email
              ORDER BY total_amount DESC, donation_count DESC
              LIMIT 10"
