@@ -688,8 +688,10 @@ class WDB_Donation_Page {
                 
                 function wdbRenderBitcoin(method) {
                     if (!method.btc_address) return '<p style="color:red;">Configure o endereço Bitcoin.</p>';
+                    // Usa protocolo bitcoin: para abrir carteiras
+                    var btcUri = 'bitcoin:' + method.btc_address;
                     var html = '<div style="text-align:center;">';
-                    html += '<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(method.btc_address) + '" alt="Bitcoin QR" style="border-radius:10px;">';
+                    html += '<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(btcUri) + '" alt="Bitcoin QR" style="border-radius:10px;">';
                     html += '</div>';
                     html += '<div style="margin-top:15px;">';
                     html += '<label style="display:block;font-weight:600;margin-bottom:5px;"><i class="fab fa-bitcoin"></i> Endereço</label>';
@@ -1746,6 +1748,7 @@ class WDB_Donation_Page {
         
         ob_start();
         ?>
+        <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="<?php echo esc_url(WDB_PLUGIN_URL . 'assets/css/fontawesome.min.css'); ?>">
         
         <style>
