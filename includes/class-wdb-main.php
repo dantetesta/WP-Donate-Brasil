@@ -87,18 +87,17 @@ class WDB_Main {
     }
     
     public function enqueue_frontend_assets() {
-        // Font Awesome sempre carrega (leve e necessário para ícones)
-        wp_enqueue_style('font-awesome-wdb', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css', array(), '6.5.1');
+        // Font Awesome local
+        wp_enqueue_style('font-awesome-wdb', WDB_PLUGIN_URL . 'assets/css/fontawesome.min.css', array(), '6.5.1');
         
         if (!$this->is_donation_page()) {
             return;
         }
         
-        wp_enqueue_script('tailwindcss', 'https://cdn.tailwindcss.com', array(), '3.4.0', false);
         wp_enqueue_style('wdb-frontend', WDB_PLUGIN_URL . 'public/css/frontend.css', array('font-awesome-wdb'), WDB_VERSION);
         wp_enqueue_script('wdb-frontend', WDB_PLUGIN_URL . 'public/js/frontend.js', array('jquery'), WDB_VERSION, true);
-        wp_enqueue_style('swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', array(), '11.0.0');
-        wp_enqueue_script('swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', array(), '11.0.0', true);
+        wp_enqueue_style('swiper', WDB_PLUGIN_URL . 'assets/css/swiper.min.css', array(), '11.0.0');
+        wp_enqueue_script('swiper', WDB_PLUGIN_URL . 'assets/js/swiper.min.js', array(), '11.0.0', true);
         
         $settings = get_option('wdb_page_settings', array());
         wp_localize_script('wdb-frontend', 'wdb_vars', array(
@@ -123,8 +122,7 @@ class WDB_Main {
             return;
         }
         
-        wp_enqueue_script('tailwindcss', 'https://cdn.tailwindcss.com', array(), '3.4.0', false);
-        wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css', array(), '6.5.1');
+        wp_enqueue_style('font-awesome', WDB_PLUGIN_URL . 'assets/css/fontawesome.min.css', array(), '6.5.1');
         wp_enqueue_style('wdb-admin', WDB_PLUGIN_URL . 'admin/css/admin.css', array(), WDB_VERSION);
         wp_enqueue_script('wdb-admin', WDB_PLUGIN_URL . 'admin/js/admin.js', array('jquery'), WDB_VERSION, true);
         

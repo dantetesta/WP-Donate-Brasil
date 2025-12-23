@@ -43,25 +43,14 @@ $methods_count = count($active_methods);
     
     <title><?php echo $page_title; ?> - <?php echo $site_name; ?></title>
     
-    <!-- Preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo esc_url(WDB_PLUGIN_URL . 'assets/css/fontawesome.min.css'); ?>">
     
     <!-- Swiper -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="<?php echo esc_url(WDB_PLUGIN_URL . 'assets/css/swiper.min.css'); ?>">
     
     <!-- AOS Animations -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo esc_url(WDB_PLUGIN_URL . 'assets/css/aos.min.css'); ?>">
     
     <style>
         :root {
@@ -607,9 +596,9 @@ $methods_count = count($active_methods);
     </footer>
     
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="<?php echo esc_url(includes_url('js/jquery/jquery.min.js')); ?>"></script>
+    <script src="<?php echo esc_url(WDB_PLUGIN_URL . 'assets/js/swiper.min.js'); ?>"></script>
+    <script src="<?php echo esc_url(WDB_PLUGIN_URL . 'assets/js/aos.min.js'); ?>"></script>
     
     <script>
         // Initialize AOS

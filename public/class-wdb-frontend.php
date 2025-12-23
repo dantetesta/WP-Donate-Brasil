@@ -55,10 +55,6 @@ class WDB_Frontend {
         <meta name="twitter:title" content="<?php echo esc_attr($page_title); ?>">
         <meta name="twitter:description" content="<?php echo esc_attr($page_description); ?>">
         
-        <!-- Preconnect para performance -->
-        <link rel="preconnect" href="https://cdn.tailwindcss.com">
-        <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-        <link rel="preconnect" href="https://cdn.jsdelivr.net">
         
         <!-- Schema.org para doações -->
         <script type="application/ld+json">
