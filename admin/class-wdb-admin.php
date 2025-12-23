@@ -393,25 +393,8 @@ class WDB_Admin {
                             <?php _e('Notificações por E-mail', 'wp-donate-brasil'); ?>
                         </h2>
                         
-                        <!-- Switch Geral de E-mails -->
-                        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 mb-4 border border-blue-200">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h3 class="font-semibold text-gray-800 flex items-center gap-2">
-                                        <i class="fa-solid fa-power-off text-blue-600"></i>
-                                        <?php _e('Ativar Notificações por E-mail', 'wp-donate-brasil'); ?>
-                                    </h3>
-                                    <p class="text-xs text-gray-500 mt-1"><?php _e('Chave geral - Desative para não enviar nenhum e-mail', 'wp-donate-brasil'); ?></p>
-                                </div>
-                                <label class="wdb-switch">
-                                    <input type="checkbox" name="emails_enabled" id="wdb-emails-enabled" <?php checked($settings['emails_enabled'] ?? true); ?>>
-                                    <span class="wdb-switch-slider"></span>
-                                </label>
-                            </div>
-                        </div>
-                        
-                        <!-- Sub-chaves de E-mails -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6" id="wdb-email-sub-options">
+                        <!-- Configurações de Notificações -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                             <div class="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
                                 <div class="flex items-center justify-between">
                                     <div>
@@ -1546,7 +1529,6 @@ class WDB_Admin {
             // Créditos
             'show_credits' => isset($_POST['show_credits']),
             // E-mails
-            'emails_enabled' => isset($_POST['emails_enabled']),
             'emails_notify_admin' => isset($_POST['emails_notify_admin']),
             'emails_notify_donor' => isset($_POST['emails_notify_donor']),
             // Mensagem de agradecimento

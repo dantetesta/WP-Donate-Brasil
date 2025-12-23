@@ -53,11 +53,6 @@ class WDB_Emails {
     private function send_email($to, $subject, $message, $headers = array()) {
         $settings = get_option('wdb_page_settings', array());
         
-        // Verifica se e-mails estão habilitados globalmente
-        if (!($settings['emails_enabled'] ?? true)) {
-            return false;
-        }
-        
         $sender_name = $settings['email_sender_name'] ?? get_bloginfo('name');
         $admin_email = $settings['admin_email'] ?? get_option('admin_email');
         
