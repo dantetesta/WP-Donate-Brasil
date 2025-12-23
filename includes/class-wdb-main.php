@@ -122,8 +122,8 @@ class WDB_Main {
             return;
         }
         
-        wp_enqueue_style('tailwindcss', WDB_PLUGIN_URL . 'assets/css/tailwind.min.css', array(), '4.1.18');
-        wp_enqueue_style('font-awesome', WDB_PLUGIN_URL . 'assets/css/fontawesome.min.css', array('tailwindcss'), '6.5.1');
+        wp_enqueue_script('tailwindcss', 'https://cdn.tailwindcss.com', array(), '3.4.0', false);
+        wp_enqueue_style('font-awesome', WDB_PLUGIN_URL . 'assets/css/fontawesome.min.css', array(), '6.5.1');
         wp_enqueue_style('wdb-admin', WDB_PLUGIN_URL . 'admin/css/admin.css', array(), WDB_VERSION);
         wp_enqueue_script('wdb-admin', WDB_PLUGIN_URL . 'admin/js/admin.js', array('jquery'), WDB_VERSION, true);
         

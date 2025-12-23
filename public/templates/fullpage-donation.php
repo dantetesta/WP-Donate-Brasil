@@ -44,7 +44,7 @@ $methods_count = count($active_methods);
     <title><?php echo $page_title; ?> - <?php echo $site_name; ?></title>
     
     <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="<?php echo esc_url(WDB_PLUGIN_URL . 'assets/css/tailwind.min.css'); ?>">
+    <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?php echo esc_url(WDB_PLUGIN_URL . 'assets/css/fontawesome.min.css'); ?>">
