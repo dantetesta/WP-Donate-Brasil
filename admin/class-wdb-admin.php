@@ -1228,7 +1228,7 @@ class WDB_Admin {
                                             'bitcoin' => 'bg-orange-100 text-orange-700',
                                             'payment_link' => 'bg-purple-100 text-purple-700',
                                             'paypal' => 'bg-indigo-100 text-indigo-700',
-                                            'wise' => 'bg-lime-100 text-lime-700'
+                                            'wise' => 'wdb-wise-tag'
                                         );
                                         $method_names = array(
                                             'pix' => 'PIX',
@@ -1537,6 +1537,9 @@ class WDB_Admin {
             @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
             #wdb-lightbox-content img { max-width: 100%; height: auto; border-radius: 8px; }
             #wdb-lightbox-content iframe { width: 100%; height: 70vh; border: none; border-radius: 8px; }
+            
+            /* Tag Wise - verde fluorescente */
+            .wdb-wise-tag { background: #a3e635; color: #1a1a1a; }
             
             /* Switches */
             .wdb-switch { position: relative; display: inline-flex; align-items: center; cursor: pointer; }
