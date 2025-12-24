@@ -1358,7 +1358,7 @@ class WDB_Admin {
                         <div class="flex items-center gap-1">
                             <?php if ($paged > 1): ?>
                             <a href="<?php echo add_query_arg('paged', $paged - 1); ?>" 
-                               class="p-2 rounded-lg bg-white border border-gray-200 hover:bg-gray-50 transition-colors">
+                               class="wdb-page-link p-2 rounded-lg bg-white border border-gray-200 transition-colors">
                                 <i class="fa-solid fa-chevron-left"></i>
                             </a>
                             <?php endif; ?>
@@ -1368,25 +1368,25 @@ class WDB_Admin {
                             $end_page = min($total_pages, $paged + 2);
                             
                             if ($start_page > 1): ?>
-                            <a href="<?php echo add_query_arg('paged', 1); ?>" class="px-3 py-2 rounded-lg bg-white border border-gray-200 hover:bg-gray-50 transition-colors">1</a>
+                            <a href="<?php echo add_query_arg('paged', 1); ?>" class="wdb-page-link px-3 py-2 rounded-lg bg-white border border-gray-200 transition-colors">1</a>
                             <?php if ($start_page > 2): ?><span class="px-2 text-gray-400">...</span><?php endif; ?>
                             <?php endif; ?>
                             
                             <?php for ($i = $start_page; $i <= $end_page; $i++): ?>
                             <a href="<?php echo add_query_arg('paged', $i); ?>"
-                               class="px-3 py-2 rounded-lg transition-colors <?php echo $paged === $i ? 'bg-orange-500 text-white font-bold' : 'bg-white border border-gray-200 hover:bg-gray-50'; ?>">
+                               class="px-3 py-2 rounded-lg transition-colors <?php echo $paged === $i ? 'wdb-page-active' : 'wdb-page-link bg-white border border-gray-200'; ?>">
                                 <?php echo $i; ?>
                             </a>
                             <?php endfor; ?>
                             
                             <?php if ($end_page < $total_pages): ?>
                             <?php if ($end_page < $total_pages - 1): ?><span class="px-2 text-gray-400">...</span><?php endif; ?>
-                            <a href="<?php echo add_query_arg('paged', $total_pages); ?>" class="px-3 py-2 rounded-lg bg-white border border-gray-200 hover:bg-gray-50 transition-colors"><?php echo $total_pages; ?></a>
+                            <a href="<?php echo add_query_arg('paged', $total_pages); ?>" class="wdb-page-link px-3 py-2 rounded-lg bg-white border border-gray-200 transition-colors"><?php echo $total_pages; ?></a>
                             <?php endif; ?>
                             
                             <?php if ($paged < $total_pages): ?>
                             <a href="<?php echo add_query_arg('paged', $paged + 1); ?>" 
-                               class="p-2 rounded-lg bg-white border border-gray-200 hover:bg-gray-50 transition-colors">
+                               class="wdb-page-link p-2 rounded-lg bg-white border border-gray-200 transition-colors">
                                 <i class="fa-solid fa-chevron-right"></i>
                             </a>
                             <?php endif; ?>
@@ -1657,6 +1657,10 @@ class WDB_Admin {
             
             /* Tag Dinheiro - amarelo dourado */
             .wdb-cash-tag { background: #fcd34d; color: #1a1a1a; }
+            
+            /* Paginação */
+            .wdb-page-link:hover { background: linear-gradient(135deg, <?php echo $primary_color; ?>, <?php echo $secondary_color; ?>) !important; color: white !important; border-color: transparent !important; }
+            .wdb-page-active { background: linear-gradient(135deg, <?php echo $primary_color; ?>, <?php echo $secondary_color; ?>) !important; color: white !important; font-weight: 700; }
             
             /* Switches */
             .wdb-switch { position: relative; display: inline-flex; align-items: center; cursor: pointer; }
