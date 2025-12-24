@@ -169,15 +169,12 @@
                 data: $form.serialize() + '&action=wdb_save_methods',
                 success: function(response) {
                     if (response.success) {
-                        self.showMessage('#wdb-methods-message', response.data.message, 'success');
                         self.showToast(response.data.message, 'success');
                     } else {
-                        self.showMessage('#wdb-methods-message', response.data.message, 'error');
                         self.showToast(response.data.message, 'error');
                     }
                 },
                 error: function() {
-                    self.showMessage('#wdb-methods-message', wdb_admin_vars.strings.error, 'error');
                     self.showToast(wdb_admin_vars.strings.error, 'error');
                 },
                 complete: function() {
