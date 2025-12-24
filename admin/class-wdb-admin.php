@@ -714,13 +714,12 @@ class WDB_Admin {
                             $card_border = $is_enabled ? 'border-green-300 bg-green-50' : 'border-gray-200 bg-white';
                             $icon_color = $is_enabled ? 'text-green-600' : 'text-gray-400';
                         ?>
-                        <div class="rounded-xl shadow-md p-6 border-2 <?php echo $card_border; ?> transition-all hover:shadow-lg cursor-pointer group"
-                             onclick="wdbOpenMethodModal(<?php echo $index; ?>)">
+                        <div class="rounded-xl shadow-md p-6 border-2 <?php echo $card_border; ?> transition-all hover:shadow-lg">
                             <div class="flex items-center justify-between mb-4">
-                                <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center <?php echo $icon_color; ?> text-2xl group-hover:scale-110 transition-transform">
+                                <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center <?php echo $icon_color; ?> text-2xl">
                                     <i class="<?php echo esc_attr($method['icon']); ?>"></i>
                                 </div>
-                                <label class="wdb-switch" onclick="event.stopPropagation();">
+                                <label class="wdb-switch">
                                     <input type="checkbox" name="methods[<?php echo $index; ?>][enabled]" 
                                            <?php checked($is_enabled); ?> 
                                            onchange="wdbToggleMethodCard(this, <?php echo $index; ?>)">
@@ -728,14 +727,14 @@ class WDB_Admin {
                                 </label>
                             </div>
                             <h3 class="text-lg font-bold text-gray-800 mb-1"><?php echo esc_html($method['name']); ?></h3>
-                            <p class="text-sm text-gray-500 mb-3"><?php echo esc_html(mb_strimwidth($method['instructions'] ?? __('Clique para configurar', 'wp-donate-brasil'), 0, 50, '...')); ?></p>
+                            <p class="text-sm text-gray-500 mb-3"><?php echo esc_html(mb_strimwidth($method['instructions'] ?? __('Configure este método', 'wp-donate-brasil'), 0, 50, '...')); ?></p>
                             <div class="flex items-center justify-between">
                                 <span class="text-xs font-medium px-2 py-1 rounded-full <?php echo $is_enabled ? 'bg-green-200 text-green-800' : 'bg-gray-200 text-gray-600'; ?>">
                                     <?php echo $is_enabled ? __('Ativo', 'wp-donate-brasil') : __('Inativo', 'wp-donate-brasil'); ?>
                                 </span>
-                                <span class="text-blue-500 text-sm font-medium group-hover:underline">
+                                <button type="button" onclick="wdbOpenMethodModal(<?php echo $index; ?>)" class="text-blue-500 hover:text-blue-700 text-sm font-medium hover:underline cursor-pointer">
                                     <i class="fa-solid fa-cog mr-1"></i><?php _e('Configurar', 'wp-donate-brasil'); ?>
-                                </span>
+                                </button>
                             </div>
                             
                             <!-- Inputs hidden -->
