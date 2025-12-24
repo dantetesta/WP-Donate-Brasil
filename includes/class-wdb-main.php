@@ -169,6 +169,56 @@ class WDB_Main {
         return floatval($value);
     }
     
+    // Captura IP do visitante
+    public static function get_visitor_ip() {
+        $ip = '';
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])[0];
+        } elseif (!empty($_SERVER['REMOTE_ADDR'])) {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        return sanitize_text_field(trim($ip));
+    }
+    
+    // Geolocalização via ip-api.com (gratuita, sem chave, 45 req/min)
+    public static function get_geolocation_by_ip() {
+        $default = array('ip' => 'Anônimo', 'country' => 'Anônimo', 'state' => 'Anônimo', 'city' => 'Anônimo');
+        
+        $ip = self::get_visitor_ip();
+        if (empty($ip) || $ip === '127.0.0.1' || $ip === '::1') {
+            $default['ip'] = $ip ?: 'localhost';
+            return $default;
+        }
+        
+        // Consulta API ip-api.com
+        $response = wp_remote_get("http://ip-api.com/json/{$ip}?fields=status,country,regionName,city", array(
+            'timeout' => 5,
+            'sslverify' => false
+        ));
+        
+        if (is_wp_error($response)) {
+            $default['ip'] = $ip;
+            return $default;
+        }
+        
+        $body = wp_remote_retrieve_body($response);
+        $data = json_decode($body, true);
+        
+        if (empty($data) || $data['status'] !== 'success') {
+            $default['ip'] = $ip;
+            return $default;
+        }
+        
+        return array(
+            'ip' => $ip,
+            'country' => !empty($data['country']) ? sanitize_text_field($data['country']) : 'Anônimo',
+            'state' => !empty($data['regionName']) ? sanitize_text_field($data['regionName']) : 'Anônimo',
+            'city' => !empty($data['city']) ? sanitize_text_field($data['city']) : 'Anônimo'
+        );
+    }
+    
     public function ajax_submit_receipt() {
         if (!wp_verify_nonce($_POST['nonce'] ?? '', 'wdb_nonce_action')) {
             wp_send_json_error(array('message' => __('Erro de segurança. Recarregue a página.', 'wp-donate-brasil')));
@@ -236,6 +286,9 @@ class WDB_Main {
         global $wpdb;
         $table_name = $wpdb->prefix . 'wdb_receipts';
         
+        // Captura IP e geolocalização
+        $geo_data = self::get_geolocation_by_ip();
+        
         $result = $wpdb->insert($table_name, array(
             'donor_name' => $donor_name,
             'donor_email' => $donor_email,
@@ -248,8 +301,12 @@ class WDB_Main {
             'status' => 'pending',
             'show_in_gallery' => $show_in_gallery,
             'anonymous' => $anonymous,
+            'donor_ip' => $geo_data['ip'],
+            'donor_country' => $geo_data['country'],
+            'donor_state' => $geo_data['state'],
+            'donor_city' => $geo_data['city'],
             'created_at' => current_time('mysql')
-        ), array('%s', '%s', '%s', '%s', '%f', '%s', '%d', '%s', '%s', '%d', '%d', '%s'));
+        ), array('%s', '%s', '%s', '%s', '%f', '%s', '%d', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s', '%s'));
         
         if ($result === false) {
             wp_send_json_error(array('message' => __('Erro ao salvar. Tente novamente.', 'wp-donate-brasil')));

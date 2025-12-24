@@ -1209,6 +1209,14 @@ class WDB_Admin {
                                                 <?php if ($receipt->donor_phone): ?>
                                                 <p class="text-xs text-gray-400"><?php echo esc_html($receipt->donor_phone); ?></p>
                                                 <?php endif; ?>
+                                                <?php 
+                                                $location_parts = array();
+                                                if (!empty($receipt->donor_city) && $receipt->donor_city !== 'Anônimo') $location_parts[] = $receipt->donor_city;
+                                                if (!empty($receipt->donor_state) && $receipt->donor_state !== 'Anônimo') $location_parts[] = $receipt->donor_state;
+                                                if (!empty($receipt->donor_country) && $receipt->donor_country !== 'Anônimo') $location_parts[] = $receipt->donor_country;
+                                                if (!empty($location_parts)): ?>
+                                                <p class="text-xs text-blue-500 mt-1"><i class="fa-solid fa-location-dot mr-1"></i><?php echo esc_html(implode(', ', $location_parts)); ?></p>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                     </td>

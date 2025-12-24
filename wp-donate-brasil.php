@@ -159,8 +159,12 @@ function wdb_activate() {
         KEY attachment_id (attachment_id)
     ) $charset_collate;";
     
-    // Adiciona coluna attachment_id se não existir (para atualizações)
+    // Adiciona colunas se não existirem (para atualizações)
     $wpdb->query("ALTER TABLE $table_name ADD COLUMN IF NOT EXISTS attachment_id bigint(20) DEFAULT NULL AFTER receipt_file");
+    $wpdb->query("ALTER TABLE $table_name ADD COLUMN IF NOT EXISTS donor_ip varchar(45) DEFAULT NULL AFTER anonymous");
+    $wpdb->query("ALTER TABLE $table_name ADD COLUMN IF NOT EXISTS donor_country varchar(100) DEFAULT 'Anônimo' AFTER donor_ip");
+    $wpdb->query("ALTER TABLE $table_name ADD COLUMN IF NOT EXISTS donor_state varchar(100) DEFAULT 'Anônimo' AFTER donor_country");
+    $wpdb->query("ALTER TABLE $table_name ADD COLUMN IF NOT EXISTS donor_city varchar(100) DEFAULT 'Anônimo' AFTER donor_state");
     
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     dbDelta($sql);
