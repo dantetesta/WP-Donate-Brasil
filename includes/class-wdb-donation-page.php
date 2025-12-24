@@ -617,6 +617,35 @@ class WDB_Donation_Page {
                 <script>
                 var wdbMethodsData = <?php echo json_encode($methods_json); ?>;
                 
+                // Função de copiar com fallback
+                function wdbCopyToClipboard(text, callback) {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(text).then(callback).catch(function() {
+                            wdbFallbackCopyToClipboard(text, callback);
+                        });
+                    } else {
+                        wdbFallbackCopyToClipboard(text, callback);
+                    }
+                }
+                
+                function wdbFallbackCopyToClipboard(text, callback) {
+                    var textArea = document.createElement('textarea');
+                    textArea.value = text;
+                    textArea.style.position = 'fixed';
+                    textArea.style.left = '-9999px';
+                    textArea.style.top = '0';
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
+                    try {
+                        document.execCommand('copy');
+                        if (callback) callback();
+                    } catch (err) {
+                        console.error('Erro ao copiar:', err);
+                    }
+                    document.body.removeChild(textArea);
+                }
+                
                 function wdbOpenModal(methodId) {
                     var method = wdbMethodsData[methodId];
                     if (!method) return;
@@ -735,7 +764,7 @@ class WDB_Donation_Page {
                 }
                 
                 function wdbCopyBank(text, el) {
-                    navigator.clipboard.writeText(text).then(function() {
+                    wdbCopyToClipboard(text, function() {
                         var check = el.querySelector('.wdb-check');
                         if (check) {
                             check.style.display = 'inline';
@@ -746,7 +775,7 @@ class WDB_Donation_Page {
                 
                 function wdbCopyBankAll(btn) {
                     var data = document.getElementById('wdb-bank-all-data').value.replace(/\\n/g, '\n');
-                    navigator.clipboard.writeText(data).then(function() {
+                    wdbCopyToClipboard(data, function() {
                         var originalHtml = btn.innerHTML;
                         btn.innerHTML = '<i class="fas fa-check" style="margin-right:6px;"></i>Copiado!';
                         btn.style.background = '#10b981';
