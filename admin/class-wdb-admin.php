@@ -1758,6 +1758,9 @@ class WDB_Admin {
                     case 'paypal':
                         $sanitized['paypal_email'] = sanitize_email($method['paypal_email'] ?? '');
                         break;
+                    case 'wise':
+                        $sanitized['wise_tag'] = sanitize_text_field($method['wise_tag'] ?? '');
+                        break;
                 }
                 
                 $methods[] = $sanitized;
