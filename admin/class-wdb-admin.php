@@ -1838,7 +1838,7 @@ class WDB_Admin {
                     type: 'POST',
                     data: {
                         action: 'wdb_add_manual_donation',
-                        nonce: wdb_admin.nonce,
+                        nonce: wdb_admin_vars.nonce,
                         donor_name: $('#add-donor-name').val(),
                         donor_email: $('#add-donor-email').val(),
                         donor_phone: $('#add-donor-phone').val(),
