@@ -849,7 +849,14 @@ class WDB_Admin {
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1"><?php _e('Nome do Banco', 'wp-donate-brasil'); ?></label>
                         <input type="text" name="methods[<?php echo $index; ?>][bank_name]" value="<?php echo esc_attr($method['bank_name'] ?? ''); ?>"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                            placeholder="<?php esc_attr_e('Ex: Bradesco', 'wp-donate-brasil'); ?>">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1"><?php _e('Código do Banco', 'wp-donate-brasil'); ?></label>
+                        <input type="text" name="methods[<?php echo $index; ?>][bank_code]" value="<?php echo esc_attr($method['bank_code'] ?? ''); ?>"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                            placeholder="<?php esc_attr_e('Ex: 237', 'wp-donate-brasil'); ?>">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1"><?php _e('Agência', 'wp-donate-brasil'); ?></label>
@@ -1741,6 +1748,7 @@ class WDB_Admin {
                         break;
                     case 'bank_transfer':
                         $sanitized['bank_name'] = sanitize_text_field($method['bank_name'] ?? '');
+                        $sanitized['bank_code'] = sanitize_text_field($method['bank_code'] ?? '');
                         $sanitized['bank_agency'] = sanitize_text_field($method['bank_agency'] ?? '');
                         $sanitized['bank_account'] = sanitize_text_field($method['bank_account'] ?? '');
                         $sanitized['bank_holder'] = sanitize_text_field($method['bank_holder'] ?? '');

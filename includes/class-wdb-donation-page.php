@@ -696,7 +696,11 @@ class WDB_Donation_Page {
                 
                 function wdbRenderBank(method) {
                     var html = '<div style="background:#f9fafb;padding:15px;border-radius:10px;">';
-                    if (method.bank_name) html += '<p><strong>Banco:</strong> ' + method.bank_name + '</p>';
+                    if (method.bank_name) {
+                        var bankDisplay = method.bank_name;
+                        if (method.bank_code) bankDisplay += ' (' + method.bank_code + ')';
+                        html += '<p><strong>Banco:</strong> ' + bankDisplay + '</p>';
+                    }
                     if (method.bank_agency) html += '<p><strong>Agência:</strong> ' + method.bank_agency + '</p>';
                     if (method.bank_account) html += '<p><strong>Conta:</strong> ' + method.bank_account + '</p>';
                     if (method.bank_holder) html += '<p><strong>Titular:</strong> ' + method.bank_holder + '</p>';
