@@ -212,6 +212,27 @@ Titular: Seu Nome
 CPF/CNPJ: 123.456.789-00
 ```
 
+**PayPal:**
+```
+E-mail do PayPal: seu-email@gmail.com
+Instruções: Envie sua doação via PayPal.
+```
+
+**Bitcoin:**
+```
+Endereço Bitcoin: bc1qxy2kgdygjrsqtzq2n0yrf...
+Rede: Bitcoin (BTC)
+Instruções: Envie sua doação para o endereço abaixo.
+```
+
+**Link de Pagamento:**
+```
+Nome do Gateway: Mercado Pago
+URL do Link: https://link.mercadopago.com.br/...
+Logo (opcional): URL da imagem do gateway
+Instruções: Clique no botão para doar via gateway.
+```
+
 ### 6️⃣ Notificações por E-mail
 
 ```
