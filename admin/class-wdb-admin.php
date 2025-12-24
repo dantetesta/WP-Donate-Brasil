@@ -948,6 +948,26 @@ class WDB_Admin {
                 </div>
                 <?php
                 break;
+                
+            case 'wise':
+                ?>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1"><?php _e('WiseTag', 'wp-donate-brasil'); ?> <span class="text-red-500">*</span></label>
+                        <div class="flex items-center gap-2">
+                            <span class="text-gray-500 font-medium">wise.com/pay/me/</span>
+                            <input type="text" name="methods[<?php echo $index; ?>][wise_tag]" value="<?php echo esc_attr($method['wise_tag'] ?? ''); ?>"
+                                class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                placeholder="<?php esc_attr_e('seuwisetag', 'wp-donate-brasil'); ?>">
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1"><?php _e('Informe apenas o seu WiseTag (sem a URL completa).', 'wp-donate-brasil'); ?></p>
+                    </div>
+                </div>
+                <div class="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <p class="text-sm text-green-700"><i class="fa-solid fa-qrcode mr-2"></i><?php _e('QR Code será gerado automaticamente com o link Wise.', 'wp-donate-brasil'); ?></p>
+                </div>
+                <?php
+                break;
         }
     }
     

@@ -635,6 +635,9 @@ class WDB_Donation_Page {
                         case 'payment_link':
                             html += wdbRenderPaymentLink(method);
                             break;
+                        case 'wise':
+                            html += wdbRenderWise(method);
+                            break;
                     }
                     
                     content.innerHTML = html;
@@ -730,6 +733,33 @@ class WDB_Donation_Page {
                     html += '<p style="font-size:12px;color:#666;margin-top:12px;"><i class="fas fa-shield-alt"></i> Você será redirecionado para o site seguro</p>';
                     html += '</div>';
                     return html;
+                }
+                
+                function wdbRenderWise(method) {
+                    if (!method.wise_tag) return '<p style="color:red;">Configure o WiseTag.</p>';
+                    var wiseUrl = 'https://wise.com/pay/me/' + method.wise_tag;
+                    var html = '<div style="text-align:center;margin-bottom:20px;">';
+                    html += '<div id="wdb-wise-qr" style="display:flex;justify-content:center;margin-bottom:15px;"></div>';
+                    html += '</div>';
+                    html += '<div style="margin-bottom:15px;">';
+                    html += '<label style="display:block;font-weight:600;margin-bottom:5px;"><i class="fa-solid fa-link"></i> Link Wise</label>';
+                    html += '<div style="display:flex;gap:8px;">';
+                    html += '<input type="text" readonly value="' + wiseUrl + '" style="flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:8px;font-size:12px;">';
+                    html += '<button type="button" onclick="wdbCopy(\'' + wiseUrl + '\', this)" style="padding:10px 15px;background:#9fe870;color:#163300;border:none;border-radius:8px;cursor:pointer;transition:all 0.3s;font-weight:600;"><i class="fas fa-copy"></i></button>';
+                    html += '</div></div>';
+                    html += '<div style="text-align:center;">';
+                    html += '<a href="' + wiseUrl + '" target="_blank" style="display:inline-flex;align-items:center;gap:10px;padding:12px 25px;background:#9fe870;color:#163300;border-radius:30px;text-decoration:none;font-weight:600;">';
+                    html += '<i class="fas fa-external-link-alt"></i> Abrir no Wise</a>';
+                    html += '</div>';
+                    setTimeout(function() { wdbLoadWiseQR(method); }, 100);
+                    return html;
+                }
+                
+                function wdbLoadWiseQR(method) {
+                    var container = document.getElementById('wdb-wise-qr');
+                    if (!container || !method.wise_tag) return;
+                    var wiseUrl = 'https://wise.com/pay/me/' + method.wise_tag;
+                    container.innerHTML = '<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(wiseUrl) + '" alt="QR Code Wise" style="width:180px;height:180px;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.1);">';
                 }
                 
                 function wdbLoadPixQR(method) {

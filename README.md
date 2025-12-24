@@ -2,7 +2,7 @@
   <img src="https://img.shields.io/badge/WordPress-6.0+-blue?style=for-the-badge&logo=wordpress" alt="WordPress">
   <img src="https://img.shields.io/badge/PHP-7.4+-purple?style=for-the-badge&logo=php" alt="PHP">
   <img src="https://img.shields.io/badge/License-GPL%20v2-green?style=for-the-badge" alt="License">
-  <img src="https://img.shields.io/badge/Version-2.0.2-orange?style=for-the-badge" alt="Version">
+  <img src="https://img.shields.io/badge/Version-2.0.3-orange?style=for-the-badge" alt="Version">
 </p>
 
 <h1 align="center">🙏 WP Donate Brasil</h1>
