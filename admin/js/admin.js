@@ -470,3 +470,36 @@ function wdbCopyShortcode(text, btn) {
     
     document.body.removeChild(textarea);
 }
+
+// Media Uploader para logo do gateway
+function wdbSelectLogo(index) {
+    var mediaUploader = wp.media({
+        title: 'Selecionar Logo',
+        button: { text: 'Usar esta imagem' },
+        multiple: false,
+        library: { type: 'image' }
+    });
+    
+    mediaUploader.on('select', function() {
+        var attachment = mediaUploader.state().get('selection').first().toJSON();
+        var input = document.getElementById('gateway_logo_' + index);
+        var preview = document.getElementById('gateway_logo_preview_' + index);
+        var removeBtn = document.getElementById('gateway_logo_remove_' + index);
+        
+        input.value = attachment.url;
+        preview.innerHTML = '<img src="' + attachment.url + '" alt="Logo" class="max-w-full max-h-full object-contain">';
+        removeBtn.classList.remove('hidden');
+    });
+    
+    mediaUploader.open();
+}
+
+function wdbRemoveLogo(index) {
+    var input = document.getElementById('gateway_logo_' + index);
+    var preview = document.getElementById('gateway_logo_preview_' + index);
+    var removeBtn = document.getElementById('gateway_logo_remove_' + index);
+    
+    input.value = '';
+    preview.innerHTML = '<i class="fa-solid fa-image text-gray-300 text-2xl"></i>';
+    removeBtn.classList.add('hidden');
+}

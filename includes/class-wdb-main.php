@@ -122,6 +122,7 @@ class WDB_Main {
             return;
         }
         
+        wp_enqueue_media();
         wp_enqueue_style('tailwindcss', WDB_PLUGIN_URL . 'assets/css/tailwind.min.css', array(), '3.4.17');
         wp_enqueue_style('font-awesome', WDB_PLUGIN_URL . 'assets/css/fontawesome.min.css', array('tailwindcss'), '6.5.1');
         wp_enqueue_style('wdb-admin', WDB_PLUGIN_URL . 'admin/css/admin.css', array(), WDB_VERSION);

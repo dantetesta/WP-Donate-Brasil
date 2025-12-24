@@ -911,10 +911,27 @@ class WDB_Admin {
                             placeholder="<?php esc_attr_e('https://...', 'wp-donate-brasil'); ?>">
                     </div>
                     <div class="md:col-span-2">
-                        <label class="block text-sm font-medium text-gray-700 mb-1"><?php _e('URL do Logo (opcional)', 'wp-donate-brasil'); ?></label>
-                        <input type="url" name="methods[<?php echo $index; ?>][gateway_logo]" value="<?php echo esc_attr($method['gateway_logo'] ?? ''); ?>"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                            placeholder="<?php esc_attr_e('https://exemplo.com/logo.png', 'wp-donate-brasil'); ?>">
+                        <label class="block text-sm font-medium text-gray-700 mb-1"><?php _e('Logo (opcional)', 'wp-donate-brasil'); ?></label>
+                        <div class="flex items-center gap-3">
+                            <input type="hidden" name="methods[<?php echo $index; ?>][gateway_logo]" id="gateway_logo_<?php echo $index; ?>" value="<?php echo esc_attr($method['gateway_logo'] ?? ''); ?>">
+                            <div id="gateway_logo_preview_<?php echo $index; ?>" class="w-16 h-16 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center overflow-hidden bg-gray-50">
+                                <?php if (!empty($method['gateway_logo'])): ?>
+                                <img src="<?php echo esc_url($method['gateway_logo']); ?>" alt="Logo" class="max-w-full max-h-full object-contain">
+                                <?php else: ?>
+                                <i class="fa-solid fa-image text-gray-300 text-2xl"></i>
+                                <?php endif; ?>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <button type="button" onclick="wdbSelectLogo(<?php echo $index; ?>)" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded-lg transition-colors flex items-center gap-2">
+                                    <i class="fa-solid fa-upload"></i>
+                                    <?php _e('Selecionar Imagem', 'wp-donate-brasil'); ?>
+                                </button>
+                                <button type="button" onclick="wdbRemoveLogo(<?php echo $index; ?>)" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium rounded-lg transition-colors flex items-center gap-2 <?php echo empty($method['gateway_logo']) ? 'hidden' : ''; ?>" id="gateway_logo_remove_<?php echo $index; ?>">
+                                    <i class="fa-solid fa-trash"></i>
+                                    <?php _e('Remover', 'wp-donate-brasil'); ?>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <?php
