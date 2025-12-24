@@ -337,30 +337,26 @@
 
 // Função global para copiar shortcode
 function wdbCopyShortcode(text, btn) {
-    navigator.clipboard.writeText(text).then(function() {
+    // Cria textarea temporário para copiar
+    var textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.left = '-9999px';
+    document.body.appendChild(textarea);
+    textarea.select();
+    textarea.setSelectionRange(0, 99999);
+    
+    try {
+        document.execCommand('copy');
+        // Feedback visual
         var originalHtml = btn.innerHTML;
-        var originalColor = btn.style.color;
-        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copiado!';
-        btn.style.color = '#10B981';
-        btn.style.fontWeight = 'bold';
+        btn.innerHTML = '<i class="fa-solid fa-check" style="color:#10B981;"></i> <span style="color:#10B981;font-weight:bold;">Copiado!</span>';
         setTimeout(function() {
             btn.innerHTML = originalHtml;
-            btn.style.color = originalColor || '';
-            btn.style.fontWeight = '';
         }, 2000);
-    }).catch(function() {
-        // Fallback para navegadores antigos
-        var textarea = document.createElement('textarea');
-        textarea.value = text;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copiado!';
-        btn.style.color = '#10B981';
-        setTimeout(function() {
-            btn.innerHTML = '<i class="fa-solid fa-copy"></i>';
-            btn.style.color = '';
-        }, 2000);
-    });
+    } catch (err) {
+        alert('Erro ao copiar. Copie manualmente: ' + text);
+    }
+    
+    document.body.removeChild(textarea);
 }
