@@ -107,29 +107,35 @@ composer require dantetesta/wp-donate-brasil
 
 Após ativar o plugin, acesse **WP Donate Brasil** no menu lateral.
 
-### 1️⃣ Configurações Gerais
+### 1️⃣ Configurações da Página
 
 ```
-📝 Página de Doação
-├── Título: "Faça uma Doação"
+📝 Configurações da Página
+├── Frase de Destaque: "Ajude a Aldeia a Sobreviver"
+├── Título da Página: "Faça uma Doação"
 ├── Subtítulo: "Sua contribuição faz a diferença!"
-├── Descrição: "Escolha uma das formas..."
-└── Slug: /doacao
+└── Descrição: "Escolha uma das formas..."
 ```
 
-### 2️⃣ Personalização Visual
+### 2️⃣ Design Visual
 
 ```
-🎨 Cores
-├── Cor Primária: #3B82F6 (Azul)
-└── Cor Secundária: #10B981 (Verde)
-
-🖼️ Mídia
-├── Logo/Banner
-└── Imagem de fundo
+🎨 Design Visual
+├── Cor Primária: Botões e destaques
+└── Cor Secundária: Gradientes
 ```
 
-### 3️⃣ Métodos de Pagamento
+### 3️⃣ Galeria de Doadores
+
+```
+🖼️ Galeria de Doadores
+├── Exibir galeria: ON/OFF
+├── Título da Galeria: "Nossos Doadores"
+├── Itens no Carrossel: 10
+└── Página de Lista Completa (slug): doadores
+```
+
+### 4️⃣ Métodos de Pagamento
 
 Configure cada método individualmente:
 
