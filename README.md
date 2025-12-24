@@ -334,6 +334,11 @@ O plugin segue as melhores práticas de segurança do WordPress:
 
 ## 📈 Changelog
 
+### 2.0.1 (23/12/2025)
+- 🔧 Bitcoin exibe ícone ao invés de QR Code
+- 🔧 Correção na coluna attachment_id do banco
+- 🔧 Top Doadores inclui anônimos no admin
+
 ### 2.0.0 (23/12/2025)
 - 🆕 Dashboard com gráficos interativos
 - 🆕 Top Doadores com ranking
