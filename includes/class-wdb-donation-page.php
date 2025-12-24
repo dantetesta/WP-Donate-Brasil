@@ -738,7 +738,9 @@ class WDB_Donation_Page {
                 function wdbRenderWise(method) {
                     if (!method.wise_tag) return '<p style="color:red;">Configure o WiseTag.</p>';
                     var wiseUrl = 'https://wise.com/pay/me/' + method.wise_tag;
+                    var wiseLogoUrl = '<?php echo WDB_PLUGIN_URL; ?>assets/images/wiselogo.png';
                     var html = '<div style="text-align:center;margin-bottom:25px;">';
+                    html += '<img src="' + wiseLogoUrl + '" alt="Wise" style="height:40px;margin-bottom:15px;">';
                     html += '<div id="wdb-wise-qr" style="display:flex;justify-content:center;margin-bottom:15px;"></div>';
                     html += '<div style="display:inline-flex;align-items:center;gap:10px;background:#9fe870;padding:12px 20px;border-radius:12px;">';
                     html += '<span style="font-size:22px;font-weight:800;color:#163300;">@' + method.wise_tag + '</span>';
