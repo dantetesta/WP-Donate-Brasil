@@ -270,6 +270,42 @@ function wdb_activate() {
 }
 register_activation_hook(__FILE__, 'wdb_activate');
 
+// Upgrade: adiciona novos métodos aos existentes
+function wdb_maybe_upgrade() {
+    $current_version = get_option('wdb_version', '1.0.0');
+    
+    // Upgrade para 2.0.3: adiciona método Wise
+    if (version_compare($current_version, '2.0.3', '<')) {
+        $methods = get_option('wdb_donation_methods', array());
+        
+        // Verifica se Wise já existe
+        $has_wise = false;
+        foreach ($methods as $method) {
+            if ($method['id'] === 'wise') {
+                $has_wise = true;
+                break;
+            }
+        }
+        
+        // Adiciona Wise se não existir
+        if (!$has_wise) {
+            $methods[] = array(
+                'id' => 'wise',
+                'name' => 'Wise',
+                'enabled' => false,
+                'icon' => 'fa-solid fa-money-bill-transfer',
+                'wise_tag' => '',
+                'instructions' => 'Escaneie o QR Code ou clique no link para doar via Wise.'
+            );
+            update_option('wdb_donation_methods', $methods);
+        }
+        
+        update_option('wdb_version', WDB_VERSION);
+        wp_cache_flush();
+    }
+}
+add_action('admin_init', 'wdb_maybe_upgrade');
+
 // Hook de desativação
 function wdb_deactivate() {
     wp_cache_flush();
