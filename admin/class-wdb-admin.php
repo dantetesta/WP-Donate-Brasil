@@ -1104,21 +1104,26 @@ class WDB_Admin {
                 <div class="flex flex-wrap gap-2 mb-6">
                     <?php 
                     $status_tabs = array(
-                        '' => array('label' => __('Todos', 'wp-donate-brasil'), 'icon' => 'fa-list', 'color' => 'blue', 'count' => $counts['all']),
-                        'pending' => array('label' => __('Pendentes', 'wp-donate-brasil'), 'icon' => 'fa-clock', 'color' => 'yellow', 'count' => $counts['pending']),
-                        'approved' => array('label' => __('Aprovados', 'wp-donate-brasil'), 'icon' => 'fa-check-circle', 'color' => 'green', 'count' => $counts['approved']),
-                        'rejected' => array('label' => __('Rejeitados', 'wp-donate-brasil'), 'icon' => 'fa-times-circle', 'color' => 'red', 'count' => $counts['rejected'])
+                        '' => array('label' => __('Todos', 'wp-donate-brasil'), 'icon' => 'fa-list', 'count' => $counts['all']),
+                        'pending' => array('label' => __('Pendentes', 'wp-donate-brasil'), 'icon' => 'fa-clock', 'count' => $counts['pending']),
+                        'approved' => array('label' => __('Aprovados', 'wp-donate-brasil'), 'icon' => 'fa-check-circle', 'count' => $counts['approved']),
+                        'rejected' => array('label' => __('Rejeitados', 'wp-donate-brasil'), 'icon' => 'fa-times-circle', 'count' => $counts['rejected'])
                     );
                     foreach ($status_tabs as $status_key => $tab):
                         $is_active = $status_filter === $status_key;
                         $tab_url = add_query_arg(array('status' => $status_key, 's' => $search, 'month' => $month_filter, 'year' => $year_filter), $base_url);
                         if (empty($status_key)) $tab_url = add_query_arg(array('s' => $search, 'month' => $month_filter, 'year' => $year_filter), $base_url);
+                        
+                        // Estilos padronizados
+                        $active_style = 'background: linear-gradient(135deg, ' . $primary_color . ', ' . $secondary_color . '); color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.15);';
+                        $normal_style = 'background: white; color: #4B5563; border: 1px solid #E5E7EB;';
                     ?>
                     <a href="<?php echo $tab_url; ?>"
-                       class="px-4 py-2.5 rounded-xl font-medium transition-all flex items-center gap-2 <?php echo $is_active ? 'bg-' . $tab['color'] . '-500 text-white shadow-lg' : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'; ?>">
+                       class="px-4 py-2.5 rounded-xl font-medium transition-all flex items-center gap-2 hover:shadow-md"
+                       style="<?php echo $is_active ? $active_style : $normal_style; ?>">
                         <i class="fa-solid <?php echo $tab['icon']; ?>"></i>
                         <?php echo $tab['label']; ?>
-                        <span class="<?php echo $is_active ? 'bg-white/30' : 'bg-gray-100'; ?> px-2 py-0.5 rounded-full text-xs font-bold">
+                        <span class="px-2 py-0.5 rounded-full text-xs font-bold" style="<?php echo $is_active ? 'background: rgba(255,255,255,0.3);' : 'background: #F3F4F6;'; ?>">
                             <?php echo $tab['count']; ?>
                         </span>
                     </a>
