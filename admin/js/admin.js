@@ -334,3 +334,18 @@
     });
 
 })(jQuery);
+
+// Função global para copiar shortcode
+function wdbCopyShortcode(text, btn) {
+    navigator.clipboard.writeText(text).then(function() {
+        var originalHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+        btn.classList.remove('text-blue-500');
+        btn.classList.add('text-green-500');
+        setTimeout(function() {
+            btn.innerHTML = originalHtml;
+            btn.classList.remove('text-green-500');
+            btn.classList.add('text-blue-500');
+        }, 1500);
+    });
+}

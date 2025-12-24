@@ -512,9 +512,21 @@ class WDB_Admin {
                             <?php _e('Shortcodes Disponíveis', 'wp-donate-brasil'); ?>
                         </h3>
                         <div class="space-y-2 text-sm text-blue-700">
-                            <p><code class="bg-white px-2 py-1 rounded">[wp_donate_brasil_page]</code> - <?php _e('Página completa de doações', 'wp-donate-brasil'); ?></p>
-                            <p><code class="bg-white px-2 py-1 rounded">[wp_donate_brasil_gallery]</code> - <?php _e('Apenas galeria de doadores', 'wp-donate-brasil'); ?></p>
-                            <p><code class="bg-white px-2 py-1 rounded">[wdb_donors_list]</code> - <?php _e('Lista completa de doadores (com paginação)', 'wp-donate-brasil'); ?></p>
+                            <p class="flex items-center gap-2">
+                                <code class="bg-white px-2 py-1 rounded">[wp_donate_brasil_page]</code>
+                                <button type="button" onclick="wdbCopyShortcode('[wp_donate_brasil_page]', this)" class="text-blue-500 hover:text-blue-700" title="Copiar"><i class="fa-solid fa-copy"></i></button>
+                                - <?php _e('Página completa de doações', 'wp-donate-brasil'); ?>
+                            </p>
+                            <p class="flex items-center gap-2">
+                                <code class="bg-white px-2 py-1 rounded">[wp_donate_brasil_gallery]</code>
+                                <button type="button" onclick="wdbCopyShortcode('[wp_donate_brasil_gallery]', this)" class="text-blue-500 hover:text-blue-700" title="Copiar"><i class="fa-solid fa-copy"></i></button>
+                                - <?php _e('Apenas galeria de doadores', 'wp-donate-brasil'); ?>
+                            </p>
+                            <p class="flex items-center gap-2">
+                                <code class="bg-white px-2 py-1 rounded">[wdb_donors_list]</code>
+                                <button type="button" onclick="wdbCopyShortcode('[wdb_donors_list]', this)" class="text-blue-500 hover:text-blue-700" title="Copiar"><i class="fa-solid fa-copy"></i></button>
+                                - <?php _e('Lista completa de doadores (com paginação)', 'wp-donate-brasil'); ?>
+                            </p>
                         </div>
                     </div>
                     
