@@ -688,13 +688,11 @@ class WDB_Donation_Page {
                 
                 function wdbRenderBitcoin(method) {
                     if (!method.btc_address) return '<p style="color:red;">Configure o endereço Bitcoin.</p>';
-                    // Usa protocolo bitcoin: para abrir carteiras
-                    var btcUri = 'bitcoin:' + method.btc_address;
-                    var html = '<div style="text-align:center;">';
-                    html += '<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(btcUri) + '" alt="Bitcoin QR" style="border-radius:10px;">';
+                    var html = '<div style="text-align:center;margin-bottom:20px;">';
+                    html += '<i class="fab fa-bitcoin" style="font-size:80px;color:#f7931a;"></i>';
                     html += '</div>';
-                    html += '<div style="margin-top:15px;">';
-                    html += '<label style="display:block;font-weight:600;margin-bottom:5px;"><i class="fab fa-bitcoin"></i> Endereço</label>';
+                    html += '<div>';
+                    html += '<label style="display:block;font-weight:600;margin-bottom:5px;"><i class="fa-solid fa-wallet"></i> Endereço Bitcoin</label>';
                     html += '<div style="display:flex;gap:8px;">';
                     html += '<input type="text" readonly value="' + method.btc_address + '" style="flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:8px;font-family:monospace;font-size:11px;">';
                     html += '<button type="button" onclick="wdbCopy(\'' + method.btc_address + '\', this)" style="padding:10px 15px;background:#f7931a;color:white;border:none;border-radius:8px;cursor:pointer;transition:all 0.3s;"><i class="fas fa-copy"></i></button>';
@@ -1244,9 +1242,8 @@ class WDB_Donation_Page {
         ?>
         <div class="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-4 border border-orange-200">
             <div class="text-center mb-4">
-                <div class="inline-block p-3 bg-white rounded-xl shadow-md">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=<?php echo urlencode($method['btc_address']); ?>" 
-                         alt="Bitcoin QR Code" class="mx-auto" width="180" height="180" loading="lazy">
+                <div class="inline-block p-4 bg-white rounded-xl shadow-md">
+                    <i class="fa-brands fa-bitcoin text-7xl text-orange-500"></i>
                 </div>
                 <p class="text-xs text-orange-600 mt-2 font-medium">
                     <i class="fa-brands fa-bitcoin mr-1"></i>
