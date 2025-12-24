@@ -176,8 +176,29 @@ class WDB_Admin {
                     </div>
                 </div>
                 
+                <!-- Tabs Navigation -->
+                <div class="bg-white rounded-xl shadow-md mb-6 border border-gray-100">
+                    <div class="flex flex-wrap border-b border-gray-200">
+                        <button type="button" class="wdb-tab-btn active px-6 py-3 text-sm font-medium text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-500 transition-all" data-tab="tab-pagina">
+                            <i class="fa-solid fa-file-alt mr-2"></i><?php _e('Página', 'wp-donate-brasil'); ?>
+                        </button>
+                        <button type="button" class="wdb-tab-btn px-6 py-3 text-sm font-medium text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-500 transition-all" data-tab="tab-galeria">
+                            <i class="fa-solid fa-images mr-2"></i><?php _e('Galeria', 'wp-donate-brasil'); ?>
+                        </button>
+                        <button type="button" class="wdb-tab-btn px-6 py-3 text-sm font-medium text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-500 transition-all" data-tab="tab-emails">
+                            <i class="fa-solid fa-envelope mr-2"></i><?php _e('E-mails', 'wp-donate-brasil'); ?>
+                        </button>
+                        <button type="button" class="wdb-tab-btn px-6 py-3 text-sm font-medium text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-500 transition-all" data-tab="tab-ferramentas">
+                            <i class="fa-solid fa-tools mr-2"></i><?php _e('Ferramentas', 'wp-donate-brasil'); ?>
+                        </button>
+                    </div>
+                </div>
+                
                 <form id="wdb-settings-form" class="space-y-6">
                     <?php wp_nonce_field('wdb_nonce_action', 'wdb_nonce'); ?>
+                    
+                    <!-- TAB: Página -->
+                    <div id="tab-pagina" class="wdb-tab-content">
                     
                     <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
                         <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
@@ -238,6 +259,11 @@ class WDB_Admin {
                             </div>
                         </div>
                     </div>
+                    
+                    </div><!-- /TAB: Página -->
+                    
+                    <!-- TAB: Galeria -->
+                    <div id="tab-galeria" class="wdb-tab-content" style="display:none;">
                     
                     <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
                         <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
@@ -359,6 +385,11 @@ class WDB_Admin {
                             </label>
                         </div>
                     </div>
+                    
+                    </div><!-- /TAB: Galeria -->
+                    
+                    <!-- TAB: E-mails -->
+                    <div id="tab-emails" class="wdb-tab-content" style="display:none;">
                     
                     <!-- Mensagem de Agradecimento -->
                     <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
@@ -506,6 +537,11 @@ class WDB_Admin {
                         </div>
                     </div>
                     
+                    </div><!-- /TAB: E-mails -->
+                    
+                    <!-- TAB: Ferramentas -->
+                    <div id="tab-ferramentas" class="wdb-tab-content" style="display:none;">
+                    
                     <div class="bg-blue-50 rounded-xl p-6 border border-blue-200">
                         <h3 class="font-bold text-blue-800 mb-2">
                             <i class="fa-solid fa-code mr-2"></i>
@@ -572,7 +608,9 @@ class WDB_Admin {
                         </div>
                     </div>
                     
-                    <div class="flex justify-end">
+                    </div><!-- /TAB: Ferramentas -->
+                    
+                    <div class="flex justify-end mt-6">
                         <button type="submit" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg transition-colors flex items-center gap-2">
                             <i class="fa-solid fa-save"></i>
                             <?php _e('Salvar Configurações', 'wp-donate-brasil'); ?>

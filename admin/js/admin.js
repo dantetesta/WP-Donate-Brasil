@@ -14,6 +14,31 @@
         init: function() {
             this.bindEvents();
             this.initColorPickers();
+            this.initTabs();
+        },
+        
+        initTabs: function() {
+            // Sistema de tabs
+            $('.wdb-tab-btn').on('click', function() {
+                var tabId = $(this).data('tab');
+                
+                // Remove active de todos os botões
+                $('.wdb-tab-btn').removeClass('active text-blue-600 border-blue-500');
+                $('.wdb-tab-btn').addClass('text-gray-600 border-transparent');
+                
+                // Adiciona active no botão clicado
+                $(this).addClass('active text-blue-600 border-blue-500');
+                $(this).removeClass('text-gray-600 border-transparent');
+                
+                // Esconde todos os conteúdos
+                $('.wdb-tab-content').hide();
+                
+                // Mostra o conteúdo da tab selecionada
+                $('#' + tabId).show();
+            });
+            
+            // Ativa a primeira tab por padrão
+            $('.wdb-tab-btn.active').trigger('click');
         },
 
         bindEvents: function() {
