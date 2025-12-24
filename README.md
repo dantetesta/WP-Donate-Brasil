@@ -47,50 +47,50 @@
   </tr>
   <tr>
     <td align="center" width="33%">
-      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/04-configuracoes-pagina.jpg" target="_blank">
-        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/04-configuracoes-pagina.jpg" alt="Configurações" width="250"/>
+      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/04-pagina-doacao-publica.jpg" target="_blank">
+        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/04-pagina-doacao-publica.jpg" alt="Página de Doação" width="250"/>
       </a>
-      <br><strong>Configurações</strong>
+      <br><strong>Página de Doação</strong>
     </td>
     <td align="center" width="33%">
-      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/05-galeria-doadores.jpg" target="_blank">
-        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/05-galeria-doadores.jpg" alt="Galeria de Doadores" width="250"/>
+      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/05-config-pagina-cores.jpg" target="_blank">
+        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/05-config-pagina-cores.jpg" alt="Configurações e Cores" width="250"/>
       </a>
-      <br><strong>Galeria de Doadores</strong>
+      <br><strong>Config. Página e Cores</strong>
     </td>
     <td align="center" width="33%">
-      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/06-emails.jpg" target="_blank">
-        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/06-emails.jpg" alt="E-mails" width="250"/>
+      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/06-modal-forma-pagamento.jpg" target="_blank">
+        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/06-modal-forma-pagamento.jpg" alt="Modal Pagamento" width="250"/>
       </a>
-      <br><strong>E-mails</strong>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="33%">
-      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/07-ferramentas.jpg" target="_blank">
-        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/07-ferramentas.jpg" alt="Ferramentas" width="250"/>
-      </a>
-      <br><strong>Ferramentas</strong>
-    </td>
-    <td align="center" width="33%">
-      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/08-pagina-publica.jpg" target="_blank">
-        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/08-pagina-publica.jpg" alt="Página Pública" width="250"/>
-      </a>
-      <br><strong>Página Pública</strong>
-    </td>
-    <td align="center" width="33%">
-      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/09-formulario-doacao.jpg" target="_blank">
-        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/09-formulario-doacao.jpg" alt="Formulário de Doação" width="250"/>
-      </a>
-      <br><strong>Formulário de Doação</strong>
+      <br><strong>Modal Forma de Pagamento</strong>
     </td>
   </tr>
   <tr>
     <td align="center" width="33%">
-      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/10-offcanvas-metodo.jpg" target="_blank">
-        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/10-offcanvas-metodo.jpg" alt="Offcanvas Método" width="250"/>
+      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/07-config-galeria-doadores.jpg" target="_blank">
+        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/07-config-galeria-doadores.jpg" alt="Config. Galeria" width="250"/>
       </a>
-      <br><strong>Configurar Método</strong>
+      <br><strong>Config. Galeria Doadores</strong>
+    </td>
+    <td align="center" width="33%">
+      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/08-config-emails-notificacoes.jpg" target="_blank">
+        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/08-config-emails-notificacoes.jpg" alt="E-mails e Notificações" width="250"/>
+      </a>
+      <br><strong>E-mails e Notificações</strong>
+    </td>
+    <td align="center" width="33%">
+      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/09-ferramentas-shortcodes.jpg" target="_blank">
+        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/09-ferramentas-shortcodes.jpg" alt="Ferramentas e Shortcodes" width="250"/>
+      </a>
+      <br><strong>Ferramentas e Shortcodes</strong>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="33%">
+      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/10-envio-comprovante.jpg" target="_blank">
+        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/10-envio-comprovante.jpg" alt="Envio de Comprovante" width="250"/>
+      </a>
+      <br><strong>Envio de Comprovante</strong>
     </td>
     <td align="center" width="33%"></td>
     <td align="center" width="33%"></td>
