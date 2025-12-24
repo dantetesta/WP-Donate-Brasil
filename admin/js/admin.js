@@ -339,13 +339,28 @@
 function wdbCopyShortcode(text, btn) {
     navigator.clipboard.writeText(text).then(function() {
         var originalHtml = btn.innerHTML;
-        btn.innerHTML = '<i class="fa-solid fa-check"></i>';
-        btn.classList.remove('text-blue-500');
-        btn.classList.add('text-green-500');
+        var originalColor = btn.style.color;
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copiado!';
+        btn.style.color = '#10B981';
+        btn.style.fontWeight = 'bold';
         setTimeout(function() {
             btn.innerHTML = originalHtml;
-            btn.classList.remove('text-green-500');
-            btn.classList.add('text-blue-500');
-        }, 1500);
+            btn.style.color = originalColor || '';
+            btn.style.fontWeight = '';
+        }, 2000);
+    }).catch(function() {
+        // Fallback para navegadores antigos
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copiado!';
+        btn.style.color = '#10B981';
+        setTimeout(function() {
+            btn.innerHTML = '<i class="fa-solid fa-copy"></i>';
+            btn.style.color = '';
+        }, 2000);
     });
 }
