@@ -198,7 +198,7 @@ class WDB_Admin {
                     <?php wp_nonce_field('wdb_nonce_action', 'wdb_nonce'); ?>
                     
                     <!-- TAB: Página -->
-                    <div id="tab-pagina" class="wdb-tab-content">
+                    <div id="tab-pagina" class="wdb-tab-content space-y-6">
                     
                     <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
                         <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
@@ -263,7 +263,7 @@ class WDB_Admin {
                     </div><!-- /TAB: Página -->
                     
                     <!-- TAB: Galeria -->
-                    <div id="tab-galeria" class="wdb-tab-content" style="display:none;">
+                    <div id="tab-galeria" class="wdb-tab-content space-y-6" style="display:none;">
                     
                     <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
                         <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
@@ -389,7 +389,7 @@ class WDB_Admin {
                     </div><!-- /TAB: Galeria -->
                     
                     <!-- TAB: E-mails -->
-                    <div id="tab-emails" class="wdb-tab-content" style="display:none;">
+                    <div id="tab-emails" class="wdb-tab-content space-y-6" style="display:none;">
                     
                     <!-- Mensagem de Agradecimento -->
                     <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
@@ -540,7 +540,7 @@ class WDB_Admin {
                     </div><!-- /TAB: E-mails -->
                     
                     <!-- TAB: Ferramentas -->
-                    <div id="tab-ferramentas" class="wdb-tab-content" style="display:none;">
+                    <div id="tab-ferramentas" class="wdb-tab-content space-y-6" style="display:none;">
                     
                     <div class="bg-blue-50 rounded-xl p-6 border border-blue-200">
                         <h3 class="font-bold text-blue-800 mb-2">
