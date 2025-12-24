@@ -805,7 +805,7 @@ class WDB_Admin {
         switch ($method['id']) {
             case 'pix':
                 ?>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1"><?php _e('Chave PIX', 'wp-donate-brasil'); ?> <span class="text-red-500">*</span></label>
                         <input type="text" name="methods[<?php echo $index; ?>][pix_key]" value="<?php echo esc_attr($method['pix_key'] ?? ''); ?>"
@@ -845,7 +845,7 @@ class WDB_Admin {
                 
             case 'bank_transfer':
                 ?>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1"><?php _e('Nome do Banco', 'wp-donate-brasil'); ?></label>
                         <input type="text" name="methods[<?php echo $index; ?>][bank_name]" value="<?php echo esc_attr($method['bank_name'] ?? ''); ?>"
