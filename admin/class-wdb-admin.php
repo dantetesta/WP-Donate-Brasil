@@ -1303,6 +1303,7 @@ class WDB_Admin {
                                                     data-anonymous="<?php echo esc_attr($receipt->anonymous ?? 0); ?>"
                                                     data-gallery="<?php echo esc_attr($receipt->show_in_gallery ?? 1); ?>"
                                                     data-status="<?php echo esc_attr($receipt->status); ?>"
+                                                    data-ip="<?php echo esc_attr($receipt->donor_ip ?? ''); ?>"
                                                     data-city="<?php echo esc_attr($receipt->donor_city ?? ''); ?>"
                                                     data-state="<?php echo esc_attr($receipt->donor_state ?? ''); ?>"
                                                     data-country="<?php echo esc_attr($receipt->donor_country ?? ''); ?>"
@@ -1747,17 +1748,25 @@ class WDB_Admin {
                 $('#edit-status-approved').prop('checked', isApproved);
                 wdbUpdateStatusLabel(document.getElementById('edit-status-approved'));
                 
-                // Exibe localização se disponível
+                // Exibe geolocalização se disponível
+                var ip = btn.data('ip') || '';
                 var city = btn.data('city') || '';
                 var state = btn.data('state') || '';
                 var country = btn.data('country') || '';
                 var locationParts = [];
                 if (city && city !== 'Anônimo') locationParts.push(city);
                 if (state && state !== 'Anônimo') locationParts.push(state);
-                if (country && country !== 'Anônimo') locationParts.push(country);
+                if (country && country !== 'Anônimo' && country !== 'Manual') locationParts.push(country);
                 
+                var geoText = '';
+                if (ip) geoText += 'IP: ' + ip;
                 if (locationParts.length > 0) {
-                    $('#edit-location-text').text(locationParts.join(', '));
+                    if (geoText) geoText += ' • ';
+                    geoText += locationParts.join(', ');
+                }
+                
+                if (geoText) {
+                    $('#edit-location-text').text(geoText);
                     $('#edit-location-info').show();
                 } else {
                     $('#edit-location-info').hide();
