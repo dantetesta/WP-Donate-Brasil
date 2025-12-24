@@ -774,7 +774,7 @@ class WDB_Admin {
                                                <?php checked(!empty($method['enabled'])); ?>>
                                         <span class="wdb-switch-slider"></span>
                                     </label>
-                                    <button type="button" onclick="wdbCloseMethodModal(<?php echo $index; ?>)" class="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition-colors">
+                                    <button type="button" onclick="event.preventDefault(); event.stopPropagation(); wdbCloseMethodModal(<?php echo $index; ?>); return false;" class="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition-colors">
                                         <i class="fa-solid fa-times"></i>
                                     </button>
                                 </div>
@@ -800,10 +800,10 @@ class WDB_Admin {
                             
                             <!-- Modal Footer -->
                             <div class="p-4 border-t border-gray-200 bg-gray-50 flex justify-end gap-3">
-                                <button type="button" onclick="wdbCloseMethodModal(<?php echo $index; ?>)" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg transition-colors">
+                                <button type="button" onclick="event.preventDefault(); wdbCloseMethodModal(<?php echo $index; ?>); return false;" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg transition-colors">
                                     <?php _e('Fechar', 'wp-donate-brasil'); ?>
                                 </button>
-                                <button type="button" onclick="wdbSaveAndCloseModal(<?php echo $index; ?>)" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors flex items-center gap-2">
+                                <button type="button" onclick="event.preventDefault(); wdbCloseMethodModal(<?php echo $index; ?>); return false;" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors flex items-center gap-2">
                                     <i class="fa-solid fa-check"></i>
                                     <?php _e('Aplicar', 'wp-donate-brasil'); ?>
                                 </button>
