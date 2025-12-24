@@ -846,17 +846,27 @@ class WDB_Admin {
             case 'bank_transfer':
                 ?>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="md:col-span-2 relative">
+                        <label class="block text-sm font-medium text-gray-700 mb-1"><?php _e('Buscar Banco', 'wp-donate-brasil'); ?></label>
+                        <input type="text" id="wdb-bank-search-<?php echo $index; ?>" 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                            placeholder="<?php esc_attr_e('Digite o nome do banco (ex: Itaú, Bradesco, Nubank...)', 'wp-donate-brasil'); ?>"
+                            autocomplete="off"
+                            onkeyup="wdbSearchBank(this, <?php echo $index; ?>)">
+                        <div id="wdb-bank-results-<?php echo $index; ?>" class="absolute z-50 w-full bg-white border border-gray-300 rounded-lg shadow-lg mt-1 max-h-48 overflow-y-auto hidden"></div>
+                        <p class="text-xs text-gray-500 mt-1"><i class="fa-solid fa-circle-info mr-1"></i><?php _e('Powered by BrasilAPI - Busca automática de bancos brasileiros', 'wp-donate-brasil'); ?></p>
+                    </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1"><?php _e('Nome do Banco', 'wp-donate-brasil'); ?></label>
-                        <input type="text" name="methods[<?php echo $index; ?>][bank_name]" value="<?php echo esc_attr($method['bank_name'] ?? ''); ?>"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                            placeholder="<?php esc_attr_e('Ex: Bradesco', 'wp-donate-brasil'); ?>">
+                        <input type="text" name="methods[<?php echo $index; ?>][bank_name]" id="wdb-bank-name-<?php echo $index; ?>" value="<?php echo esc_attr($method['bank_name'] ?? ''); ?>"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-gray-50"
+                            placeholder="<?php esc_attr_e('Preenchido automaticamente', 'wp-donate-brasil'); ?>" readonly>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1"><?php _e('Código do Banco', 'wp-donate-brasil'); ?></label>
-                        <input type="text" name="methods[<?php echo $index; ?>][bank_code]" value="<?php echo esc_attr($method['bank_code'] ?? ''); ?>"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                            placeholder="<?php esc_attr_e('Ex: 237', 'wp-donate-brasil'); ?>">
+                        <input type="text" name="methods[<?php echo $index; ?>][bank_code]" id="wdb-bank-code-<?php echo $index; ?>" value="<?php echo esc_attr($method['bank_code'] ?? ''); ?>"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-gray-50"
+                            placeholder="<?php esc_attr_e('Preenchido automaticamente', 'wp-donate-brasil'); ?>" readonly>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1"><?php _e('Agência', 'wp-donate-brasil'); ?></label>

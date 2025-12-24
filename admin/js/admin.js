@@ -503,3 +503,82 @@ function wdbRemoveLogo(index) {
     preview.innerHTML = '<i class="fa-solid fa-image text-gray-300 text-2xl"></i>';
     removeBtn.classList.add('hidden');
 }
+
+// Cache de bancos da BrasilAPI
+var wdbBanksCache = null;
+var wdbBankSearchTimeout = null;
+
+// Busca bancos na BrasilAPI
+function wdbSearchBank(input, index) {
+    var query = input.value.toLowerCase().trim();
+    var resultsDiv = document.getElementById('wdb-bank-results-' + index);
+    
+    if (query.length < 2) {
+        resultsDiv.classList.add('hidden');
+        return;
+    }
+    
+    clearTimeout(wdbBankSearchTimeout);
+    wdbBankSearchTimeout = setTimeout(function() {
+        if (wdbBanksCache) {
+            wdbFilterBanks(query, index);
+        } else {
+            resultsDiv.innerHTML = '<div class="p-3 text-center text-gray-500"><i class="fa-solid fa-spinner fa-spin mr-2"></i>Carregando bancos...</div>';
+            resultsDiv.classList.remove('hidden');
+            
+            fetch('https://brasilapi.com.br/api/banks/v1')
+                .then(function(response) { return response.json(); })
+                .then(function(data) {
+                    wdbBanksCache = data.filter(function(b) { return b.code !== null; });
+                    wdbFilterBanks(query, index);
+                })
+                .catch(function() {
+                    resultsDiv.innerHTML = '<div class="p-3 text-center text-red-500">Erro ao carregar bancos</div>';
+                });
+        }
+    }, 300);
+}
+
+// Filtra bancos pelo nome ou código
+function wdbFilterBanks(query, index) {
+    var resultsDiv = document.getElementById('wdb-bank-results-' + index);
+    var filtered = wdbBanksCache.filter(function(bank) {
+        return bank.name.toLowerCase().includes(query) || 
+               bank.fullName.toLowerCase().includes(query) ||
+               (bank.code && bank.code.toString().includes(query));
+    }).slice(0, 10);
+    
+    if (filtered.length === 0) {
+        resultsDiv.innerHTML = '<div class="p-3 text-center text-gray-500">Nenhum banco encontrado</div>';
+        resultsDiv.classList.remove('hidden');
+        return;
+    }
+    
+    var html = '';
+    filtered.forEach(function(bank) {
+        html += '<div class="p-3 hover:bg-blue-50 cursor-pointer border-b border-gray-100 last:border-0" onclick="wdbSelectBank(' + index + ', \'' + bank.name.replace(/'/g, "\\'") + '\', ' + bank.code + ')">';
+        html += '<div class="font-semibold text-gray-800">' + bank.name + '</div>';
+        html += '<div class="text-xs text-gray-500">Código: ' + bank.code + '</div>';
+        html += '</div>';
+    });
+    
+    resultsDiv.innerHTML = html;
+    resultsDiv.classList.remove('hidden');
+}
+
+// Seleciona banco
+function wdbSelectBank(index, name, code) {
+    document.getElementById('wdb-bank-name-' + index).value = name;
+    document.getElementById('wdb-bank-code-' + index).value = code;
+    document.getElementById('wdb-bank-search-' + index).value = '';
+    document.getElementById('wdb-bank-results-' + index).classList.add('hidden');
+}
+
+// Fecha resultados ao clicar fora
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('[id^="wdb-bank-search-"]') && !e.target.closest('[id^="wdb-bank-results-"]')) {
+        document.querySelectorAll('[id^="wdb-bank-results-"]').forEach(function(el) {
+            el.classList.add('hidden');
+        });
+    }
+});
