@@ -122,10 +122,12 @@ O **WP Donate Brasil** é um plugin WordPress desenvolvido especialmente para o 
 | Método | Descrição |
 |--------|-----------|
 | **PIX** | QR Code dinâmico com copia e cola |
-| **Transferência** | Dados bancários completos |
-| **Bitcoin** | Endereço com copia e cola |
+| **Transferência** | Dados bancários completos com busca via BrasilAPI |
+| **Bitcoin** | Endereço BTC/Lightning com copia e cola |
 | **PayPal** | Link direto para doação |
+| **Wise** | Transferência internacional com QR Code |
 | **Link de Pagamento** | Qualquer gateway externo |
+| **Dinheiro** | Registro manual de doações em espécie |
 
 ### 📊 Dashboard Administrativo
 
@@ -157,16 +159,20 @@ O **WP Donate Brasil** é um plugin WordPress desenvolvido especialmente para o 
 ├─────────────────────────────────────────────────────────┤
 │  ◉ PIX                                          [Ativo] │
 │    Chave, Nome do Titular, Cidade, Banco                │
-│    QR Code gerado automaticamente                       │
+│    QR Code gerado automaticamente (padrão EMV)          │
 ├─────────────────────────────────────────────────────────┤
 │  ◉ Transferência Bancária                       [Ativo] │
-│    Banco, Agência, Conta, Titular, CPF/CNPJ             │
+│    Banco (busca via BrasilAPI), Agência, Conta          │
+│    Titular, CPF/CNPJ com máscara automática             │
+├─────────────────────────────────────────────────────────┤
+│  ◉ Bitcoin                                      [Ativo] │
+│    Endereço Bitcoin, Rede (BTC/Lightning)               │
 ├─────────────────────────────────────────────────────────┤
 │  ◉ PayPal                                       [Ativo] │
 │    E-mail do PayPal, Instruções                         │
 ├─────────────────────────────────────────────────────────┤
-│  ◉ Bitcoin                                      [Ativo] │
-│    Endereço Bitcoin, Rede (BTC)                         │
+│  ◉ Wise                                         [Ativo] │
+│    Tag Wise, QR Code para transferência internacional   │
 ├─────────────────────────────────────────────────────────┤
 │  ◉ Link de Pagamento                            [Ativo] │
 │    Nome do Gateway, URL, Logo (opcional)                │
@@ -179,14 +185,17 @@ O **WP Donate Brasil** é um plugin WordPress desenvolvido especialmente para o 
 - ✅ **Galeria de doadores** com carrossel animado
 - ✅ **Upload de comprovantes** com validação
 - ✅ **Aprovação/Rejeição** de doações
+- ✅ **Adicionar doação manual** pelo admin
+- ✅ **Geolocalização do doador** via IP (país, estado, cidade)
 - ✅ **Notificações por e-mail** personalizáveis
 - ✅ **Relatórios e gráficos** por período
 - ✅ **Top doadores** com ranking
 - ✅ **Doações anônimas** opcionais
 - ✅ **Shortcodes** flexíveis
 - ✅ **Cores personalizáveis** no admin
-- ✅ **SEO otimizado** com meta tags
+- ✅ **SEO otimizado** com meta tags Open Graph e Schema.org
 - ✅ **Acessibilidade** WCAG 2.1
+- ✅ **Integração BrasilAPI** para busca de bancos
 
 ---
 
@@ -312,6 +321,13 @@ Logo (opcional): URL da imagem do gateway
 Instruções: Clique no botão para doar via gateway.
 ```
 
+**Wise (Transferência Internacional):**
+```
+Tag Wise: @seutag
+QR Code: Gerado automaticamente
+Instruções: Envie sua doação via Wise.
+```
+
 ### 6️⃣ Notificações por E-mail
 
 ```
@@ -414,7 +430,6 @@ O plugin segue as melhores práticas de segurança do WordPress:
 ## 📈 Changelog
 
 ### 2.0.4 (24/12/2025)
-- 🆕 Suporte ao método **Wise** para transferências internacionais
 - 🆕 **Geolocalização do doador** via IP (país, estado, cidade)
 - 🆕 **Adicionar doação manual** pelo painel admin
 - 🆕 Integração **BrasilAPI** para busca automática de bancos
@@ -429,6 +444,7 @@ O plugin segue as melhores práticas de segurança do WordPress:
 
 ### 2.0.3 (23/12/2025)
 - 🆕 Suporte ao método **Wise** (transferência internacional)
+- 🆕 Suporte ao método **Dinheiro** (registro manual de espécie)
 - 🔧 Melhorias de estabilidade
 
 ### 2.0.2 (23/12/2025)
