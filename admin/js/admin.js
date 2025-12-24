@@ -436,7 +436,16 @@ jQuery(document).ready(function($) {
     $('.wdb-modal-switch').on('change', function() {
         var index = $(this).data('index');
         var cardSwitch = $('input[name="methods[' + index + '][enabled]"]');
-        cardSwitch.prop('checked', this.checked).trigger('change');
+        var label = $(this).siblings('.wdb-switch-label');
+        
+        // Atualiza label do switch
+        if (this.checked) {
+            label.text('Ativo');
+        } else {
+            label.text('Inativo');
+        }
+        
+        cardSwitch.prop('checked', this.checked);
         wdbToggleMethodCard(cardSwitch[0], index);
     });
 });
