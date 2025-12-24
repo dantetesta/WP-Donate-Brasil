@@ -1271,7 +1271,7 @@ class WDB_Donation_Page {
                 
                 <?php if ($settings['show_credits'] ?? true): ?>
                 <!-- Crédito do desenvolvedor -->
-                <div class="text-center mt-16 pb-6">
+                <div style="width:100%;text-align:center;margin-top:4rem;padding-bottom:1.5rem;">
                     <a href="https://dantetesta.com.br" target="_blank" rel="noopener" style="font-size: 11px; color: #9ca3af; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#6b7280'" onmouseout="this.style.color='#9ca3af'">
                         Desenvolvido por Dante Testa
                     </a>
