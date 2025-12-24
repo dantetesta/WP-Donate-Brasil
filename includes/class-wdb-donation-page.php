@@ -738,18 +738,15 @@ class WDB_Donation_Page {
                 function wdbRenderWise(method) {
                     if (!method.wise_tag) return '<p style="color:red;">Configure o WiseTag.</p>';
                     var wiseUrl = 'https://wise.com/pay/me/' + method.wise_tag;
-                    var html = '<div style="text-align:center;margin-bottom:20px;">';
-                    html += '<div id="wdb-wise-qr" style="display:flex;justify-content:center;margin-bottom:10px;"></div>';
-                    html += '<p style="font-size:18px;font-weight:700;color:#163300;margin:0;">@' + method.wise_tag + '</p>';
+                    var html = '<div style="text-align:center;margin-bottom:25px;">';
+                    html += '<div id="wdb-wise-qr" style="display:flex;justify-content:center;margin-bottom:15px;"></div>';
+                    html += '<div style="display:inline-flex;align-items:center;gap:10px;background:#9fe870;padding:12px 20px;border-radius:12px;">';
+                    html += '<span style="font-size:22px;font-weight:800;color:#163300;">@' + method.wise_tag + '</span>';
+                    html += '<button type="button" onclick="wdbCopy(\'@' + method.wise_tag + '\', this)" style="padding:8px 12px;background:#163300;color:#9fe870;border:none;border-radius:8px;cursor:pointer;transition:all 0.3s;font-weight:600;"><i class="fas fa-copy"></i></button>';
                     html += '</div>';
-                    html += '<div style="margin-bottom:15px;">';
-                    html += '<label style="display:block;font-weight:600;margin-bottom:5px;"><i class="fa-solid fa-link"></i> Link Wise</label>';
-                    html += '<div style="display:flex;gap:8px;">';
-                    html += '<input type="text" readonly value="' + wiseUrl + '" style="flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:8px;font-size:12px;">';
-                    html += '<button type="button" onclick="wdbCopy(\'' + wiseUrl + '\', this)" style="padding:10px 15px;background:#9fe870;color:#163300;border:none;border-radius:8px;cursor:pointer;transition:all 0.3s;font-weight:600;"><i class="fas fa-copy"></i></button>';
-                    html += '</div></div>';
+                    html += '</div>';
                     html += '<div style="text-align:center;">';
-                    html += '<a href="' + wiseUrl + '" target="_blank" style="display:inline-flex;align-items:center;gap:10px;padding:12px 25px;background:#9fe870;color:#163300;border-radius:30px;text-decoration:none;font-weight:600;">';
+                    html += '<a href="' + wiseUrl + '" target="_blank" style="display:inline-flex;align-items:center;gap:10px;padding:14px 30px;background:#163300;color:#9fe870;border-radius:30px;text-decoration:none;font-weight:600;font-size:16px;">';
                     html += '<i class="fas fa-external-link-alt"></i> Abrir no Wise</a>';
                     html += '</div>';
                     setTimeout(function() { wdbLoadWiseQR(method); }, 100);
