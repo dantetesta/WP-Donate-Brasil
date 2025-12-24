@@ -298,6 +298,8 @@ class WDB_Donation_Page {
             .wdb-method-icon.bitcoin { background: linear-gradient(135deg, #F7931A, #E67E22); box-shadow: 0 10px 40px rgba(247,147,26,0.3); }
             .wdb-method-icon.paypal { background: linear-gradient(135deg, #003087, #009CDE); box-shadow: 0 10px 40px rgba(0,156,222,0.3); }
             .wdb-method-icon.link { background: linear-gradient(135deg, #8B5CF6, #6D28D9); box-shadow: 0 10px 40px rgba(139,92,246,0.3); }
+            .wdb-method-icon.wise { background: linear-gradient(135deg, #9fe870, #163300); box-shadow: 0 10px 40px rgba(159,232,112,0.3); }
+            .wdb-method-icon.wise img { width: 50px; height: 50px; object-fit: contain; }
             
             .wdb-method-title {
                 font-size: 1.5rem;
@@ -534,14 +536,16 @@ class WDB_Donation_Page {
                             'bank_transfer' => 'fas fa-university',
                             'bitcoin' => 'fab fa-bitcoin',
                             'paypal' => 'fab fa-paypal',
-                            'payment_link' => 'fas fa-link'
+                            'payment_link' => 'fas fa-link',
+                            'wise' => 'wise-img'
                         );
                         $descs = array(
                             'pix' => __('Transferência instantânea via QR Code', 'wp-donate-brasil'),
                             'bank_transfer' => __('Depósito ou transferência bancária', 'wp-donate-brasil'),
                             'bitcoin' => __('Doação em criptomoeda', 'wp-donate-brasil'),
                             'paypal' => __('Pagamento internacional seguro', 'wp-donate-brasil'),
-                            'payment_link' => __('Link direto para pagamento', 'wp-donate-brasil')
+                            'payment_link' => __('Link direto para pagamento', 'wp-donate-brasil'),
+                            'wise' => __('Transferência internacional rápida', 'wp-donate-brasil')
                         );
                         foreach ($methods as $method): 
                             if (empty($method['enabled'])) continue;
@@ -551,7 +555,11 @@ class WDB_Donation_Page {
                         ?>
                         <div class="wdb-method-card" onclick="wdbOpenModal('<?php echo esc_attr($method['id']); ?>')">
                             <div class="wdb-method-icon <?php echo esc_attr($icon_class); ?>">
+                                <?php if ($method['id'] === 'wise'): ?>
+                                <img src="<?php echo WDB_PLUGIN_URL; ?>assets/images/ico-wise.png" alt="Wise">
+                                <?php else: ?>
                                 <i class="<?php echo $icons[$method['id']] ?? 'fas fa-hand-holding-heart'; ?>"></i>
+                                <?php endif; ?>
                             </div>
                             <h3 class="wdb-method-title"><?php echo esc_html($method['name']); ?></h3>
                             <p class="wdb-method-desc"><?php echo $descs[$method['id']] ?? esc_html($method['instructions'] ?? ''); ?></p>
