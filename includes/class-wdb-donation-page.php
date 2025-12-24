@@ -703,23 +703,23 @@ class WDB_Donation_Page {
                     
                     // Dados em formato simples - clique para copiar
                     if (bankDisplay) {
-                        html += '<p style="margin-bottom:12px;cursor:pointer;" onclick="wdbCopy(\'' + bankDisplay + '\', this)" title="Clique para copiar"><strong style="color:#374151;">Banco:</strong> <span style="color:#6b7280;">' + bankDisplay + '</span></p>';
+                        html += '<p style="margin-bottom:12px;cursor:pointer;" onclick="wdbCopyBank(\'' + bankDisplay + '\', this)" title="Clique para copiar"><strong style="color:#374151;">Banco:</strong> <span style="color:#6b7280;">' + bankDisplay + '</span><span class="wdb-check" style="display:none;margin-left:8px;color:#10b981;"><i class="fas fa-check-circle"></i></span></p>';
                         allData.push('Banco: ' + bankDisplay);
                     }
                     if (method.bank_agency) {
-                        html += '<p style="margin-bottom:12px;cursor:pointer;" onclick="wdbCopy(\'' + method.bank_agency + '\', this)" title="Clique para copiar"><strong style="color:#374151;">Agência:</strong> <span style="color:#6b7280;">' + method.bank_agency + '</span></p>';
+                        html += '<p style="margin-bottom:12px;cursor:pointer;" onclick="wdbCopyBank(\'' + method.bank_agency + '\', this)" title="Clique para copiar"><strong style="color:#374151;">Agência:</strong> <span style="color:#6b7280;">' + method.bank_agency + '</span><span class="wdb-check" style="display:none;margin-left:8px;color:#10b981;"><i class="fas fa-check-circle"></i></span></p>';
                         allData.push('Agência: ' + method.bank_agency);
                     }
                     if (method.bank_account) {
-                        html += '<p style="margin-bottom:12px;cursor:pointer;" onclick="wdbCopy(\'' + method.bank_account + '\', this)" title="Clique para copiar"><strong style="color:#374151;">Conta:</strong> <span style="color:#6b7280;">' + method.bank_account + '</span></p>';
+                        html += '<p style="margin-bottom:12px;cursor:pointer;" onclick="wdbCopyBank(\'' + method.bank_account + '\', this)" title="Clique para copiar"><strong style="color:#374151;">Conta:</strong> <span style="color:#6b7280;">' + method.bank_account + '</span><span class="wdb-check" style="display:none;margin-left:8px;color:#10b981;"><i class="fas fa-check-circle"></i></span></p>';
                         allData.push('Conta: ' + method.bank_account);
                     }
                     if (method.bank_holder) {
-                        html += '<p style="margin-bottom:12px;cursor:pointer;" onclick="wdbCopy(\'' + method.bank_holder + '\', this)" title="Clique para copiar"><strong style="color:#374151;">Titular:</strong> <span style="color:#6b7280;">' + method.bank_holder + '</span></p>';
+                        html += '<p style="margin-bottom:12px;cursor:pointer;" onclick="wdbCopyBank(\'' + method.bank_holder + '\', this)" title="Clique para copiar"><strong style="color:#374151;">Titular:</strong> <span style="color:#6b7280;">' + method.bank_holder + '</span><span class="wdb-check" style="display:none;margin-left:8px;color:#10b981;"><i class="fas fa-check-circle"></i></span></p>';
                         allData.push('Titular: ' + method.bank_holder);
                     }
                     if (method.bank_cpf_cnpj) {
-                        html += '<p style="margin-bottom:0;cursor:pointer;" onclick="wdbCopy(\'' + method.bank_cpf_cnpj + '\', this)" title="Clique para copiar"><strong style="color:#374151;">CPF/CNPJ:</strong> <span style="color:#6b7280;">' + method.bank_cpf_cnpj + '</span></p>';
+                        html += '<p style="margin-bottom:0;cursor:pointer;" onclick="wdbCopyBank(\'' + method.bank_cpf_cnpj + '\', this)" title="Clique para copiar"><strong style="color:#374151;">CPF/CNPJ:</strong> <span style="color:#6b7280;">' + method.bank_cpf_cnpj + '</span><span class="wdb-check" style="display:none;margin-left:8px;color:#10b981;"><i class="fas fa-check-circle"></i></span></p>';
                         allData.push('CPF/CNPJ: ' + method.bank_cpf_cnpj);
                     }
                     
@@ -732,6 +732,16 @@ class WDB_Donation_Page {
                     html += '<p style="text-align:center;font-size:11px;color:#9ca3af;margin-top:10px;margin-bottom:0;"><i class="fas fa-mouse-pointer" style="margin-right:4px;"></i>Clique em qualquer dado para copiar</p>';
                     html += '</div>';
                     return html;
+                }
+                
+                function wdbCopyBank(text, el) {
+                    navigator.clipboard.writeText(text).then(function() {
+                        var check = el.querySelector('.wdb-check');
+                        if (check) {
+                            check.style.display = 'inline';
+                            setTimeout(function() { check.style.display = 'none'; }, 2000);
+                        }
+                    });
                 }
                 
                 function wdbCopyBankAll(btn) {
