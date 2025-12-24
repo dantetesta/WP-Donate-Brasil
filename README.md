@@ -133,9 +133,33 @@ Após ativar o plugin, acesse **WP Donate Brasil** no menu lateral.
 ├── Título da Galeria: "Nossos Doadores"
 ├── Itens no Carrossel: 10
 └── Página de Lista Completa (slug): doadores
+
+📋 Campos visíveis na Lista:
+├── Foto, Nome, E-mail, Telefone
+├── Valor, Qtd. Doações, Data
+└── Método, Mensagem
+
+🔍 Filtros na Lista de Doadores:
+├── Busca, Método
+└── Mês/Ano, Ordenação
+
+⚙️ Outras opções:
+└── Exibir créditos do desenvolvedor
 ```
 
-### 4️⃣ Métodos de Pagamento
+### 4️⃣ Mensagem de Agradecimento
+
+```
+🎉 Mensagem de Agradecimento
+├── Título: "Muito Obrigado! 🙏"
+├── Subtítulo: "Sua doação faz a diferença!"
+└── Mensagem Completa: (personalizável)
+
+✨ Exibida após enviar comprovante
+   com animação de confetes!
+```
+
+### 5️⃣ Métodos de Pagamento
 
 Configure cada método individualmente:
 
@@ -157,51 +181,45 @@ Titular: Seu Nome
 CPF/CNPJ: 123.456.789-00
 ```
 
-### 4️⃣ Notificações por E-mail
+### 6️⃣ Notificações por E-mail
 
 ```
-📧 E-mails Automáticos
-├── ✉️ Notificar Admin: Nova doação recebida
-├── ✉️ Notificar Doador: Comprovante recebido
-└── ✉️ Notificar Doador: Doação aprovada
+📧 Configurações Gerais
+├── Notificar Administrador: ON/OFF
+├── Notificar Doador: ON/OFF
+├── Nome do Remetente: "Canal Doadores"
+└── E-mail do Administrador: admin@site.com
 
 📝 Macros disponíveis:
 {nome}, {email}, {valor}, {metodo}, {data}, {mensagem}
+
+✉️ Templates de E-mail:
+├── 🔔 Nova Doação (para Admin)
+│   └── "Nova doação recebida de {nome}"
+├── 📩 Comprovante Recebido (para Doador)
+│   └── "Recebemos sua doação, {nome}!"
+└── ✅ Doação Aprovada (para Doador)
+    └── "Sua doação foi confirmada, {nome}!"
+```
+
+### 7️⃣ Ferramentas de Manutenção
+
+```
+🛠️ Ferramentas de Manutenção
+├── 🧹 Limpar Cache do Plugin
+├── 🗑️ Limpar Transientes
+└── ⚠️ Deletar Todas as Doações (Zona de Perigo)
 ```
 
 ---
 
 ## 🔗 Shortcodes
 
-### Página de Doação Completa
-
-```php
-[wdb_donation_page]
-```
-
-Exibe a página completa de doação com todos os métodos configurados.
-
-### Botão de Doação
-
-```php
-[wdb_donate_button text="Doe Agora" class="minha-classe"]
-```
-
-| Parâmetro | Descrição | Padrão |
-|-----------|-----------|--------|
-| `text` | Texto do botão | "Fazer Doação" |
-| `class` | Classes CSS extras | "" |
-
-### Galeria de Doadores
-
-```php
-[wdb_donors_gallery limit="12" columns="4"]
-```
-
-| Parâmetro | Descrição | Padrão |
-|-----------|-----------|--------|
-| `limit` | Quantidade de doadores | 10 |
-| `columns` | Colunas no grid | 3 |
+| Shortcode | Descrição |
+|-----------|-----------|
+| `[wp_donate_brasil_page]` | Página completa de doações |
+| `[wp_donate_brasil_gallery]` | Apenas galeria de doadores |
+| `[wdb_donors_list]` | Lista completa de doadores (com paginação) |
 
 ### Total Arrecadado
 
