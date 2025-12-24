@@ -2173,6 +2173,21 @@ class WDB_Admin {
         global $wpdb;
         $table_name = $wpdb->prefix . 'wdb_receipts';
         
+        // Garante que colunas de geolocalização existam
+        $columns = $wpdb->get_col("SHOW COLUMNS FROM $table_name");
+        if (!in_array('donor_ip', $columns)) {
+            $wpdb->query("ALTER TABLE $table_name ADD COLUMN donor_ip varchar(45) DEFAULT NULL");
+        }
+        if (!in_array('donor_country', $columns)) {
+            $wpdb->query("ALTER TABLE $table_name ADD COLUMN donor_country varchar(100) DEFAULT 'Anônimo'");
+        }
+        if (!in_array('donor_state', $columns)) {
+            $wpdb->query("ALTER TABLE $table_name ADD COLUMN donor_state varchar(100) DEFAULT 'Anônimo'");
+        }
+        if (!in_array('donor_city', $columns)) {
+            $wpdb->query("ALTER TABLE $table_name ADD COLUMN donor_city varchar(100) DEFAULT 'Anônimo'");
+        }
+        
         $result = $wpdb->insert($table_name, array(
             'donor_name' => $donor_name,
             'donor_email' => $donor_email,
@@ -2193,7 +2208,7 @@ class WDB_Admin {
         ), array('%s', '%s', '%s', '%s', '%f', '%s', '%d', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s', '%s'));
         
         if ($result === false) {
-            wp_send_json_error(array('message' => __('Erro ao salvar doação.', 'wp-donate-brasil')));
+            wp_send_json_error(array('message' => __('Erro ao salvar doação.', 'wp-donate-brasil') . ' [DB: ' . $wpdb->last_error . ']'));
         }
         
         wp_cache_flush();
