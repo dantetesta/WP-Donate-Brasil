@@ -688,9 +688,15 @@ class WDB_Donation_Page {
                 
                 function wdbRenderBitcoin(method) {
                     if (!method.btc_address) return '<p style="color:red;">Configure o endereço Bitcoin.</p>';
+                    var network = method.btc_network || 'Bitcoin (BTC)';
                     var html = '<div style="text-align:center;margin-bottom:20px;">';
                     html += '<i class="fab fa-bitcoin" style="font-size:80px;color:#f7931a;"></i>';
                     html += '</div>';
+                    html += '<div style="margin-bottom:15px;">';
+                    html += '<label style="display:block;font-weight:600;margin-bottom:5px;"><i class="fa-solid fa-network-wired"></i> Rede</label>';
+                    html += '<div style="padding:10px;background:#fef3c7;border:1px solid #f59e0b;border-radius:8px;color:#92400e;font-weight:600;text-align:center;">';
+                    html += '<i class="fa-solid fa-exclamation-triangle" style="margin-right:5px;"></i>' + network;
+                    html += '</div></div>';
                     html += '<div>';
                     html += '<label style="display:block;font-weight:600;margin-bottom:5px;"><i class="fa-solid fa-wallet"></i> Endereço Bitcoin</label>';
                     html += '<div style="display:flex;gap:8px;">';
