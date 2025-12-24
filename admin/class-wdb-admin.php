@@ -593,7 +593,7 @@ class WDB_Admin {
                     </div><!-- /TAB: Ferramentas -->
                     
                     <div class="flex justify-end mt-6">
-                        <button type="submit" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg transition-colors flex items-center gap-2">
+                        <button type="submit" class="px-6 py-3 text-white font-bold rounded-lg transition-all hover:opacity-90 hover:shadow-lg flex items-center gap-2" style="background: linear-gradient(135deg, <?php echo $primary_color; ?>, <?php echo $secondary_color; ?>);">
                             <i class="fa-solid fa-save"></i>
                             <?php _e('Salvar Configurações', 'wp-donate-brasil'); ?>
                         </button>
@@ -728,7 +728,7 @@ class WDB_Admin {
                     </div>
                     
                     <div class="flex justify-end">
-                        <button type="submit" class="px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg transition-colors flex items-center gap-2">
+                        <button type="submit" class="px-6 py-3 text-white font-bold rounded-lg transition-all hover:opacity-90 hover:shadow-lg flex items-center gap-2" style="background: linear-gradient(135deg, <?php echo $primary_color; ?>, <?php echo $secondary_color; ?>);">
                             <i class="fa-solid fa-save"></i>
                             <?php _e('Salvar Métodos', 'wp-donate-brasil'); ?>
                         </button>
@@ -1085,7 +1085,7 @@ class WDB_Admin {
                         
                         <!-- Botões -->
                         <div class="flex items-end gap-2">
-                            <button type="submit" class="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg transition-colors flex items-center gap-2">
+                            <button type="submit" class="px-5 py-2.5 text-white font-medium rounded-lg transition-all hover:opacity-90 hover:shadow-lg flex items-center gap-2" style="background: linear-gradient(135deg, <?php echo $primary_color; ?>, <?php echo $secondary_color; ?>);">
                                 <i class="fa-solid fa-filter"></i>
                                 <?php _e('Filtrar', 'wp-donate-brasil'); ?>
                             </button>
