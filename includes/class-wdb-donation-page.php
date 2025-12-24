@@ -216,6 +216,14 @@ class WDB_Donation_Page {
                 to { opacity: 1; transform: translateY(0); }
             }
             
+            @keyframes wdb-spin {
+                to { transform: rotate(360deg); }
+            }
+            
+            .wdb-spinner {
+                animation: wdb-spin 1s linear infinite;
+            }
+            
             /* Section Title */
             .wdb-section-title {
                 text-align: center;
@@ -766,8 +774,24 @@ class WDB_Donation_Page {
                 function wdbLoadWiseQR(method) {
                     var container = document.getElementById('wdb-wise-qr');
                     if (!container || !method.wise_tag) return;
+                    
+                    // Mostra preloader
+                    container.innerHTML = '<div style="width:180px;height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px;">' +
+                        '<div class="wdb-spinner" style="width:50px;height:50px;border:4px solid #e5e7eb;border-top-color:#9fe870;border-radius:50%;"></div>' +
+                        '<span style="font-size:13px;color:#6b7280;">Gerando QR Code...</span>' +
+                        '</div>';
+                    
                     var wiseUrl = 'https://wise.com/pay/me/' + method.wise_tag;
-                    container.innerHTML = '<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(wiseUrl) + '" alt="QR Code Wise" style="width:180px;height:180px;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.1);">';
+                    var img = new Image();
+                    img.onload = function() {
+                        setTimeout(function() {
+                            container.innerHTML = '<img src="' + img.src + '" alt="QR Code Wise" style="width:180px;height:180px;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.1);opacity:0;transition:opacity 0.3s;">';
+                            setTimeout(function() {
+                                container.querySelector('img').style.opacity = '1';
+                            }, 50);
+                        }, 1500);
+                    };
+                    img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(wiseUrl);
                 }
                 
                 function wdbLoadPixQR(method) {
@@ -776,10 +800,11 @@ class WDB_Donation_Page {
                     
                     // Mostra preloader
                     container.innerHTML = '<div style="width:180px;height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px;">' +
-                        '<div style="width:50px;height:50px;border:4px solid #e5e7eb;border-top-color:#10b981;border-radius:50%;animation:wdb-spin 1s linear infinite;"></div>' +
+                        '<div class="wdb-spinner" style="width:50px;height:50px;border:4px solid #e5e7eb;border-top-color:#10b981;border-radius:50%;"></div>' +
                         '<span style="font-size:13px;color:#6b7280;">Gerando QR Code...</span>' +
                         '</div>';
                     
+                    var startTime = Date.now();
                     var xhr = new XMLHttpRequest();
                     xhr.open('POST', '<?php echo admin_url('admin-ajax.php'); ?>', true);
                     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -788,10 +813,16 @@ class WDB_Donation_Page {
                             try {
                                 var response = JSON.parse(xhr.responseText);
                                 if (response.success && response.data.qr_url) {
-                                    // Preload da imagem antes de exibir
                                     var img = new Image();
                                     img.onload = function() {
-                                        container.innerHTML = '<img src="' + response.data.qr_url + '" alt="QR Code PIX" style="width:180px;height:180px;">';
+                                        var elapsed = Date.now() - startTime;
+                                        var delay = Math.max(0, 1500 - elapsed);
+                                        setTimeout(function() {
+                                            container.innerHTML = '<img src="' + response.data.qr_url + '" alt="QR Code PIX" style="width:180px;height:180px;opacity:0;transition:opacity 0.3s;">';
+                                            setTimeout(function() {
+                                                container.querySelector('img').style.opacity = '1';
+                                            }, 50);
+                                        }, delay);
                                     };
                                     img.onerror = function() {
                                         container.innerHTML = '<p style="color:red;padding:20px;">Erro ao carregar QR Code</p>';
