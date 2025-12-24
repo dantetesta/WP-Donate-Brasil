@@ -44,7 +44,7 @@ O **WP Donate Brasil** é um plugin WordPress desenvolvido especialmente para o 
 |--------|-----------|
 | **PIX** | QR Code dinâmico com copia e cola |
 | **Transferência** | Dados bancários completos |
-| **Bitcoin** | Carteira com QR Code |
+| **Bitcoin** | Endereço com copia e cola |
 | **PayPal** | Link direto para doação |
 | **Link de Pagamento** | Qualquer gateway externo |
 
