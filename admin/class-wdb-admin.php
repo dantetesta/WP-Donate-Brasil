@@ -773,7 +773,6 @@ class WDB_Admin {
                                         <input type="checkbox" class="wdb-modal-switch" data-index="<?php echo $index; ?>"
                                                <?php checked(!empty($method['enabled'])); ?>>
                                         <span class="wdb-switch-slider"></span>
-                                        <span class="wdb-switch-label text-white"><?php _e('Ativo', 'wp-donate-brasil'); ?></span>
                                     </label>
                                     <button type="button" onclick="wdbCloseMethodModal(<?php echo $index; ?>)" class="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition-colors">
                                         <i class="fa-solid fa-times"></i>
