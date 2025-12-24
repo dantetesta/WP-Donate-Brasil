@@ -1199,12 +1199,22 @@ class WDB_Admin {
                                             'bank_transfer' => 'bg-blue-100 text-blue-700',
                                             'bitcoin' => 'bg-orange-100 text-orange-700',
                                             'payment_link' => 'bg-purple-100 text-purple-700',
-                                            'paypal' => 'bg-indigo-100 text-indigo-700'
+                                            'paypal' => 'bg-indigo-100 text-indigo-700',
+                                            'wise' => 'bg-lime-100 text-lime-700'
+                                        );
+                                        $method_names = array(
+                                            'pix' => 'PIX',
+                                            'bank_transfer' => __('Transferência Bancária', 'wp-donate-brasil'),
+                                            'bitcoin' => 'Bitcoin',
+                                            'payment_link' => __('Link de Pagamento', 'wp-donate-brasil'),
+                                            'paypal' => 'PayPal',
+                                            'wise' => 'Wise'
                                         );
                                         $method_color = $method_colors[$receipt->donation_method] ?? 'bg-gray-100 text-gray-700';
+                                        $method_name = $method_names[$receipt->donation_method] ?? ucfirst(str_replace('_', ' ', $receipt->donation_method));
                                         ?>
                                         <span class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold <?php echo $method_color; ?>">
-                                            <?php echo esc_html(ucfirst(str_replace('_', ' ', $receipt->donation_method))); ?>
+                                            <?php echo esc_html($method_name); ?>
                                         </span>
                                     </td>
                                     <td class="px-5 py-4">
