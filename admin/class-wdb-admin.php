@@ -754,9 +754,9 @@ class WDB_Admin {
                     
                     <!-- Modais -->
                     <?php foreach ($methods as $index => $method): ?>
-                    <div id="wdb-modal-<?php echo $index; ?>" class="wdb-offcanvas fixed inset-0 z-50 invisible">
-                        <div class="fixed inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="wdbCloseMethodModal(<?php echo $index; ?>)"></div>
-                        <div class="fixed right-0 w-full max-w-lg bg-white shadow-2xl overflow-hidden flex flex-col transform translate-x-full transition-transform duration-300" style="top: 32px; height: calc(100vh - 32px);">
+                    <div id="wdb-modal-<?php echo $index; ?>" class="wdb-offcanvas fixed inset-0 z-50" style="visibility: hidden; pointer-events: none;">
+                        <div class="wdb-offcanvas-backdrop fixed inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="wdbCloseMethodModal(<?php echo $index; ?>)"></div>
+                        <div class="wdb-offcanvas-panel fixed right-0 w-full max-w-lg bg-white shadow-2xl overflow-hidden flex flex-col transition-transform duration-300" style="top: 32px; height: calc(100vh - 32px); transform: translateX(100%);">
                             <!-- Modal Header -->
                             <div class="p-6 border-b border-gray-200 flex items-center justify-between" style="background: linear-gradient(135deg, <?php echo $primary_color; ?>, <?php echo $secondary_color; ?>);">
                                 <div class="flex items-center gap-4">

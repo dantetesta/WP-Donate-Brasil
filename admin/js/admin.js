@@ -360,17 +360,16 @@
 // Funções para offcanvas de métodos de pagamento
 function wdbOpenMethodModal(index) {
     var offcanvas = document.getElementById('wdb-modal-' + index);
-    var backdrop = offcanvas.querySelector('.bg-black\\/50');
-    var panel = offcanvas.querySelector('.max-w-lg');
+    var backdrop = offcanvas.querySelector('.wdb-offcanvas-backdrop');
+    var panel = offcanvas.querySelector('.wdb-offcanvas-panel');
     
-    offcanvas.classList.remove('invisible');
+    offcanvas.style.visibility = 'visible';
+    offcanvas.style.pointerEvents = 'auto';
     
     // Anima após um frame
     requestAnimationFrame(function() {
-        backdrop.classList.remove('opacity-0');
-        backdrop.classList.add('opacity-100');
-        panel.classList.remove('translate-x-full');
-        panel.classList.add('translate-x-0');
+        backdrop.style.opacity = '1';
+        panel.style.transform = 'translateX(0)';
     });
     
     document.body.style.overflow = 'hidden';
@@ -378,17 +377,16 @@ function wdbOpenMethodModal(index) {
 
 function wdbCloseMethodModal(index) {
     var offcanvas = document.getElementById('wdb-modal-' + index);
-    var backdrop = offcanvas.querySelector('.bg-black\\/50');
-    var panel = offcanvas.querySelector('.max-w-lg');
+    var backdrop = offcanvas.querySelector('.wdb-offcanvas-backdrop');
+    var panel = offcanvas.querySelector('.wdb-offcanvas-panel');
     
-    backdrop.classList.remove('opacity-100');
-    backdrop.classList.add('opacity-0');
-    panel.classList.remove('translate-x-0');
-    panel.classList.add('translate-x-full');
+    backdrop.style.opacity = '0';
+    panel.style.transform = 'translateX(100%)';
     
     // Esconde após animação
     setTimeout(function() {
-        offcanvas.classList.add('invisible');
+        offcanvas.style.visibility = 'hidden';
+        offcanvas.style.pointerEvents = 'none';
     }, 300);
     
     document.body.style.overflow = '';
