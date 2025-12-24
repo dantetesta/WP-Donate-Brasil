@@ -1891,10 +1891,11 @@ class WDB_Donation_Page {
                     $donation_page_id = get_option('wdb_donation_page_id');
                     $donation_page_url = $donation_page_id ? get_permalink($donation_page_id) : home_url('/doacoes/');
                     ?>
-                    <a href="<?php echo esc_url($donation_page_url); ?>" class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-semibold transition-all hover:opacity-90 hover:shadow-lg" style="background: linear-gradient(135deg, <?php echo $primary_color; ?>, <?php echo $secondary_color; ?>);">
+                    <a href="<?php echo esc_url($donation_page_url); ?>" class="wdb-back-btn inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-semibold transition-all hover:shadow-lg" style="background: linear-gradient(135deg, <?php echo $primary_color; ?>, <?php echo $secondary_color; ?>);">
                         <i class="fas fa-arrow-left"></i>
                         <?php _e('Voltar para página de doações', 'wp-donate-brasil'); ?>
                     </a>
+                    <style>.wdb-back-btn:hover { color: white !important; opacity: 0.9; }</style>
                 </div>
                 
                 <?php if ($filter_search_enabled || $filter_method_enabled || $filter_month_enabled || $filter_order_enabled): 
