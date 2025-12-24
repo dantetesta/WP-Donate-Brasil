@@ -695,18 +695,53 @@ class WDB_Donation_Page {
                 }
                 
                 function wdbRenderBank(method) {
-                    var html = '<div style="background:#f9fafb;padding:15px;border-radius:10px;">';
-                    if (method.bank_name) {
-                        var bankDisplay = method.bank_name;
-                        if (method.bank_code) bankDisplay += ' (' + method.bank_code + ')';
-                        html += '<p><strong>Banco:</strong> ' + bankDisplay + '</p>';
+                    var allData = [];
+                    var bankDisplay = method.bank_name || '';
+                    if (method.bank_code) bankDisplay += ' (' + method.bank_code + ')';
+                    
+                    var html = '<div style="background:#f9fafb;padding:15px;border-radius:12px;position:relative;">';
+                    
+                    // Botão copiar tudo
+                    html += '<button type="button" onclick="wdbCopyBankAll(this)" style="position:absolute;top:10px;right:10px;padding:8px 12px;background:#3b82f6;color:white;border:none;border-radius:8px;cursor:pointer;font-size:12px;display:flex;align-items:center;gap:5px;"><i class="fas fa-copy"></i> Copiar tudo</button>';
+                    
+                    html += '<div style="margin-top:35px;">';
+                    if (bankDisplay) {
+                        html += '<p style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #e5e7eb;" data-value="Banco: ' + bankDisplay + '"><span><strong>Banco:</strong> <span onclick="wdbCopy(\'' + bankDisplay + '\', this)" style="cursor:pointer;color:#3b82f6;" title="Clique para copiar">' + bankDisplay + '</span></span><button type="button" onclick="wdbCopy(\'' + bankDisplay + '\', this)" style="padding:4px 8px;background:#e5e7eb;border:none;border-radius:4px;cursor:pointer;font-size:11px;"><i class="fas fa-copy"></i></button></p>';
+                        allData.push('Banco: ' + bankDisplay);
                     }
-                    if (method.bank_agency) html += '<p><strong>Agência:</strong> ' + method.bank_agency + '</p>';
-                    if (method.bank_account) html += '<p><strong>Conta:</strong> ' + method.bank_account + '</p>';
-                    if (method.bank_holder) html += '<p><strong>Titular:</strong> ' + method.bank_holder + '</p>';
-                    if (method.bank_cpf_cnpj) html += '<p><strong>CPF/CNPJ:</strong> ' + method.bank_cpf_cnpj + '</p>';
+                    if (method.bank_agency) {
+                        html += '<p style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #e5e7eb;" data-value="Agência: ' + method.bank_agency + '"><span><strong>Agência:</strong> <span onclick="wdbCopy(\'' + method.bank_agency + '\', this)" style="cursor:pointer;color:#3b82f6;" title="Clique para copiar">' + method.bank_agency + '</span></span><button type="button" onclick="wdbCopy(\'' + method.bank_agency + '\', this)" style="padding:4px 8px;background:#e5e7eb;border:none;border-radius:4px;cursor:pointer;font-size:11px;"><i class="fas fa-copy"></i></button></p>';
+                        allData.push('Agência: ' + method.bank_agency);
+                    }
+                    if (method.bank_account) {
+                        html += '<p style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #e5e7eb;" data-value="Conta: ' + method.bank_account + '"><span><strong>Conta:</strong> <span onclick="wdbCopy(\'' + method.bank_account + '\', this)" style="cursor:pointer;color:#3b82f6;" title="Clique para copiar">' + method.bank_account + '</span></span><button type="button" onclick="wdbCopy(\'' + method.bank_account + '\', this)" style="padding:4px 8px;background:#e5e7eb;border:none;border-radius:4px;cursor:pointer;font-size:11px;"><i class="fas fa-copy"></i></button></p>';
+                        allData.push('Conta: ' + method.bank_account);
+                    }
+                    if (method.bank_holder) {
+                        html += '<p style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #e5e7eb;" data-value="Titular: ' + method.bank_holder + '"><span><strong>Titular:</strong> <span onclick="wdbCopy(\'' + method.bank_holder + '\', this)" style="cursor:pointer;color:#3b82f6;" title="Clique para copiar">' + method.bank_holder + '</span></span><button type="button" onclick="wdbCopy(\'' + method.bank_holder + '\', this)" style="padding:4px 8px;background:#e5e7eb;border:none;border-radius:4px;cursor:pointer;font-size:11px;"><i class="fas fa-copy"></i></button></p>';
+                        allData.push('Titular: ' + method.bank_holder);
+                    }
+                    if (method.bank_cpf_cnpj) {
+                        html += '<p style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;" data-value="CPF/CNPJ: ' + method.bank_cpf_cnpj + '"><span><strong>CPF/CNPJ:</strong> <span onclick="wdbCopy(\'' + method.bank_cpf_cnpj + '\', this)" style="cursor:pointer;color:#3b82f6;" title="Clique para copiar">' + method.bank_cpf_cnpj + '</span></span><button type="button" onclick="wdbCopy(\'' + method.bank_cpf_cnpj + '\', this)" style="padding:4px 8px;background:#e5e7eb;border:none;border-radius:4px;cursor:pointer;font-size:11px;"><i class="fas fa-copy"></i></button></p>';
+                        allData.push('CPF/CNPJ: ' + method.bank_cpf_cnpj);
+                    }
+                    html += '</div>';
+                    html += '<input type="hidden" id="wdb-bank-all-data" value="' + allData.join('\\n') + '">';
                     html += '</div>';
                     return html;
+                }
+                
+                function wdbCopyBankAll(btn) {
+                    var data = document.getElementById('wdb-bank-all-data').value.replace(/\\n/g, '\n');
+                    navigator.clipboard.writeText(data).then(function() {
+                        var originalHtml = btn.innerHTML;
+                        btn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+                        btn.style.background = '#10b981';
+                        setTimeout(function() {
+                            btn.innerHTML = originalHtml;
+                            btn.style.background = '#3b82f6';
+                        }, 2000);
+                    });
                 }
                 
                 function wdbRenderBitcoin(method) {
