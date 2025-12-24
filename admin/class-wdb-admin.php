@@ -1053,7 +1053,7 @@ class WDB_Admin {
         $secondary_color = esc_attr($page_settings['secondary_color'] ?? '#10B981');
         ?>
         <div class="wrap wdb-receipts-page">
-            <div class="max-w-7xl mx-auto py-6">
+            <div class="w-full py-6 px-4">
                 <!-- Header -->
                 <div class="rounded-2xl p-6 mb-6 shadow-lg" style="background: linear-gradient(135deg, <?php echo $primary_color; ?>, <?php echo $secondary_color; ?>);">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
