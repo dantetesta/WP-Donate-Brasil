@@ -478,16 +478,10 @@ class WDB_Admin {
                         
                         <!-- E-mail: Nova doação para Admin -->
                         <div class="bg-gray-50 rounded-lg p-4 mb-4">
-                            <div class="flex items-center justify-between mb-3">
-                                <h3 class="font-semibold text-gray-700 flex items-center gap-2">
-                                    <i class="fa-solid fa-bell text-yellow-500"></i>
-                                    <?php _e('Nova Doação (para Admin)', 'wp-donate-brasil'); ?>
-                                </h3>
-                                <label class="wdb-switch">
-                                    <input type="checkbox" name="email_admin_new" <?php checked($settings['email_admin_new'] ?? true); ?>>
-                                    <span class="wdb-switch-slider"></span>
-                                </label>
-                            </div>
+                            <h3 class="font-semibold text-gray-700 flex items-center gap-2 mb-3">
+                                <i class="fa-solid fa-bell text-yellow-500"></i>
+                                <?php _e('Nova Doação (para Admin)', 'wp-donate-brasil'); ?>
+                            </h3>
                             <div class="grid grid-cols-1 gap-3">
                                 <input type="text" name="email_admin_new_subject" 
                                     value="<?php echo esc_attr($settings['email_admin_new_subject'] ?? '🔔 Nova doação recebida de {nome}'); ?>"
@@ -498,16 +492,10 @@ class WDB_Admin {
                         
                         <!-- E-mail: Comprovante Recebido (para Doador) -->
                         <div class="bg-gray-50 rounded-lg p-4 mb-4">
-                            <div class="flex items-center justify-between mb-3">
-                                <h3 class="font-semibold text-gray-700 flex items-center gap-2">
-                                    <i class="fa-solid fa-inbox text-blue-500"></i>
-                                    <?php _e('Comprovante Recebido (para Doador)', 'wp-donate-brasil'); ?>
-                                </h3>
-                                <label class="wdb-switch">
-                                    <input type="checkbox" name="email_donor_received" <?php checked($settings['email_donor_received'] ?? true); ?>>
-                                    <span class="wdb-switch-slider"></span>
-                                </label>
-                            </div>
+                            <h3 class="font-semibold text-gray-700 flex items-center gap-2 mb-3">
+                                <i class="fa-solid fa-inbox text-blue-500"></i>
+                                <?php _e('Comprovante Recebido (para Doador)', 'wp-donate-brasil'); ?>
+                            </h3>
                             <div class="grid grid-cols-1 gap-3">
                                 <input type="text" name="email_donor_received_subject" 
                                     value="<?php echo esc_attr($settings['email_donor_received_subject'] ?? '📩 Recebemos sua doação, {nome}!'); ?>"
@@ -518,16 +506,10 @@ class WDB_Admin {
                         
                         <!-- E-mail: Doação Aprovada (para Doador) -->
                         <div class="bg-gray-50 rounded-lg p-4">
-                            <div class="flex items-center justify-between mb-3">
-                                <h3 class="font-semibold text-gray-700 flex items-center gap-2">
-                                    <i class="fa-solid fa-check-circle text-green-500"></i>
-                                    <?php _e('Doação Aprovada (para Doador)', 'wp-donate-brasil'); ?>
-                                </h3>
-                                <label class="wdb-switch">
-                                    <input type="checkbox" name="email_donor_approved" <?php checked($settings['email_donor_approved'] ?? true); ?>>
-                                    <span class="wdb-switch-slider"></span>
-                                </label>
-                            </div>
+                            <h3 class="font-semibold text-gray-700 flex items-center gap-2 mb-3">
+                                <i class="fa-solid fa-check-circle text-green-500"></i>
+                                <?php _e('Doação Aprovada (para Doador)', 'wp-donate-brasil'); ?>
+                            </h3>
                             <div class="grid grid-cols-1 gap-3">
                                 <input type="text" name="email_donor_approved_subject" 
                                     value="<?php echo esc_attr($settings['email_donor_approved_subject'] ?? '✅ Sua doação foi confirmada, {nome}!'); ?>"

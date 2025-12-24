@@ -121,7 +121,6 @@ class WDB_Emails {
         
         // Verifica se notificação para admin está habilitada
         if (!($settings['emails_notify_admin'] ?? true)) return false;
-        if (empty($settings['email_admin_new'])) return false;
         
         $admin_email = $settings['admin_email'] ?? get_option('admin_email');
         $subject = $this->replace_macros($settings['email_admin_new_subject'] ?? '🔔 Nova doação recebida de {nome}', $donation_data);
@@ -136,7 +135,6 @@ class WDB_Emails {
         
         // Verifica se notificação para doador está habilitada
         if (!($settings['emails_notify_donor'] ?? true)) return false;
-        if (empty($settings['email_donor_received'])) return false;
         if (empty($donation_data['donor_email']) || $donation_data['donor_email'] === 'anonimo@anonimo.com') return false;
         
         $subject = $this->replace_macros($settings['email_donor_received_subject'] ?? '📩 Recebemos sua doação, {nome}!', $donation_data);
@@ -151,7 +149,6 @@ class WDB_Emails {
         
         // Verifica se notificação para doador está habilitada
         if (!($settings['emails_notify_donor'] ?? true)) return false;
-        if (empty($settings['email_donor_approved'])) return false;
         
         global $wpdb;
         $table_name = $wpdb->prefix . 'wdb_receipts';
