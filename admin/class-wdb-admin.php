@@ -2392,7 +2392,9 @@ class WDB_Admin {
             'bank_transfer' => array('label' => 'Transferência', 'color' => '#3B82F6'),
             'bitcoin' => array('label' => 'Bitcoin', 'color' => '#F7931A'),
             'paypal' => array('label' => 'PayPal', 'color' => '#003087'),
-            'payment_link' => array('label' => 'Link', 'color' => '#8B5CF6')
+            'payment_link' => array('label' => 'Link', 'color' => '#8B5CF6'),
+            'cash' => array('label' => 'Dinheiro', 'color' => '#6B7280'),
+            'wise' => array('label' => 'Wise', 'color' => '#9fe870')
         );
         
         // Status labels

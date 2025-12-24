@@ -3,7 +3,7 @@
  * Plugin Name: WP Donate Brasil
  * Plugin URI: https://dantetesta.com.br/plugins
  * Description: Sistema de doações com página pública configurável, múltiplos meios de pagamento e galeria de doadores.
- * Version: 2.0.3
+ * Version: 2.0.4
  * Author: Dante Testa
  * Author URI: https://dantetesta.com.br
  * License: GPL v2 or later
@@ -25,7 +25,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Constantes do plugin
-define('WDB_VERSION', '2.0.3');
+define('WDB_VERSION', '2.0.4');
 define('WDB_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('WDB_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('WDB_PLUGIN_BASENAME', plugin_basename(__FILE__));

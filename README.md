@@ -2,7 +2,7 @@
   <img src="https://img.shields.io/badge/WordPress-6.0+-blue?style=for-the-badge&logo=wordpress" alt="WordPress">
   <img src="https://img.shields.io/badge/PHP-7.4+-purple?style=for-the-badge&logo=php" alt="PHP">
   <img src="https://img.shields.io/badge/License-GPL%20v2-green?style=for-the-badge" alt="License">
-  <img src="https://img.shields.io/badge/Version-2.0.3-orange?style=for-the-badge" alt="Version">
+  <img src="https://img.shields.io/badge/Version-2.0.4-orange?style=for-the-badge" alt="Version">
 </p>
 
 <h1 align="center">🙏 WP Donate Brasil</h1>
@@ -412,6 +412,24 @@ O plugin segue as melhores práticas de segurança do WordPress:
 ---
 
 ## 📈 Changelog
+
+### 2.0.4 (24/12/2025)
+- 🆕 Suporte ao método **Wise** para transferências internacionais
+- 🆕 **Geolocalização do doador** via IP (país, estado, cidade)
+- 🆕 **Adicionar doação manual** pelo painel admin
+- 🆕 Integração **BrasilAPI** para busca automática de bancos
+- 🆕 Máscara CPF/CNPJ nos dados bancários
+- 🆕 Botão "Voltar para página de doações" na lista de doadores
+- 🔧 Label "Cash" alterado para "Dinheiro" nos gráficos
+- 🔧 Feedback visual com checkzinho verde ao copiar dados
+- 🔧 Redesign dos dados bancários no modal
+- 🔧 Paginação com cores do tema
+- 🔧 Página de comprovantes full width
+- 🔧 Rodapé do desenvolvedor centralizado
+
+### 2.0.3 (23/12/2025)
+- 🆕 Suporte ao método **Wise** (transferência internacional)
+- 🔧 Melhorias de estabilidade
 
 ### 2.0.2 (23/12/2025)
 - 🆕 Sistema de Tabs nas Configurações (Página, Galeria, E-mails, Ferramentas)
