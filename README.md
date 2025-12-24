@@ -219,15 +219,8 @@ CPF/CNPJ: 123.456.789-00
 |-----------|-----------|
 | `[wp_donate_brasil_page]` | Página completa de doações |
 | `[wp_donate_brasil_gallery]` | Apenas galeria de doadores |
+| `[wp_donate_brasil_fullpage]` | Página isolada (template próprio) |
 | `[wdb_donors_list]` | Lista completa de doadores (com paginação) |
-
-### Total Arrecadado
-
-```php
-[wdb_total_donations]
-```
-
-Exibe o valor total de doações aprovadas.
 
 ---
 
