@@ -704,36 +704,47 @@ class WDB_Admin {
                     </div>
                 </div>
                 
-                <form id="wdb-methods-form" class="space-y-6">
+                <form id="wdb-methods-form">
                     <?php wp_nonce_field('wdb_nonce_action', 'wdb_nonce'); ?>
                     
-                    <?php foreach ($methods as $index => $method): ?>
-                    <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-                        <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
-                                <i class="<?php echo esc_attr($method['icon']); ?>"></i>
-                                <?php echo esc_html($method['name']); ?>
-                            </h2>
-                            <label class="wdb-switch">
-                                <input type="checkbox" name="methods[<?php echo $index; ?>][enabled]" <?php checked(!empty($method['enabled'])); ?>>
-                                <span class="wdb-switch-slider"></span>
-                                <span class="wdb-switch-label"><?php _e('Ativo', 'wp-donate-brasil'); ?></span>
-                            </label>
+                    <!-- Grid de Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                        <?php foreach ($methods as $index => $method): 
+                            $is_enabled = !empty($method['enabled']);
+                            $card_border = $is_enabled ? 'border-green-300 bg-green-50' : 'border-gray-200 bg-white';
+                            $icon_color = $is_enabled ? 'text-green-600' : 'text-gray-400';
+                        ?>
+                        <div class="rounded-xl shadow-md p-6 border-2 <?php echo $card_border; ?> transition-all hover:shadow-lg cursor-pointer group"
+                             onclick="wdbOpenMethodModal(<?php echo $index; ?>)">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center <?php echo $icon_color; ?> text-2xl group-hover:scale-110 transition-transform">
+                                    <i class="<?php echo esc_attr($method['icon']); ?>"></i>
+                                </div>
+                                <label class="wdb-switch" onclick="event.stopPropagation();">
+                                    <input type="checkbox" name="methods[<?php echo $index; ?>][enabled]" 
+                                           <?php checked($is_enabled); ?> 
+                                           onchange="wdbToggleMethodCard(this, <?php echo $index; ?>)">
+                                    <span class="wdb-switch-slider"></span>
+                                </label>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-800 mb-1"><?php echo esc_html($method['name']); ?></h3>
+                            <p class="text-sm text-gray-500 mb-3"><?php echo esc_html(mb_strimwidth($method['instructions'] ?? __('Clique para configurar', 'wp-donate-brasil'), 0, 50, '...')); ?></p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-medium px-2 py-1 rounded-full <?php echo $is_enabled ? 'bg-green-200 text-green-800' : 'bg-gray-200 text-gray-600'; ?>">
+                                    <?php echo $is_enabled ? __('Ativo', 'wp-donate-brasil') : __('Inativo', 'wp-donate-brasil'); ?>
+                                </span>
+                                <span class="text-blue-500 text-sm font-medium group-hover:underline">
+                                    <i class="fa-solid fa-cog mr-1"></i><?php _e('Configurar', 'wp-donate-brasil'); ?>
+                                </span>
+                            </div>
+                            
+                            <!-- Inputs hidden -->
+                            <input type="hidden" name="methods[<?php echo $index; ?>][id]" value="<?php echo esc_attr($method['id']); ?>">
+                            <input type="hidden" name="methods[<?php echo $index; ?>][name]" value="<?php echo esc_attr($method['name']); ?>">
+                            <input type="hidden" name="methods[<?php echo $index; ?>][icon]" value="<?php echo esc_attr($method['icon']); ?>">
                         </div>
-                        
-                        <input type="hidden" name="methods[<?php echo $index; ?>][id]" value="<?php echo esc_attr($method['id']); ?>">
-                        <input type="hidden" name="methods[<?php echo $index; ?>][name]" value="<?php echo esc_attr($method['name']); ?>">
-                        <input type="hidden" name="methods[<?php echo $index; ?>][icon]" value="<?php echo esc_attr($method['icon']); ?>">
-                        
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700 mb-1"><?php _e('Instruções', 'wp-donate-brasil'); ?></label>
-                            <textarea name="methods[<?php echo $index; ?>][instructions]" rows="2"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"><?php echo esc_textarea($method['instructions'] ?? ''); ?></textarea>
-                        </div>
-                        
-                        <?php $this->render_method_fields($method, $index); ?>
+                        <?php endforeach; ?>
                     </div>
-                    <?php endforeach; ?>
                     
                     <div class="flex justify-end">
                         <button type="submit" class="px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg transition-colors flex items-center gap-2">
@@ -741,6 +752,67 @@ class WDB_Admin {
                             <?php _e('Salvar Métodos', 'wp-donate-brasil'); ?>
                         </button>
                     </div>
+                    
+                    <!-- Modais -->
+                    <?php foreach ($methods as $index => $method): ?>
+                    <div id="wdb-modal-<?php echo $index; ?>" class="wdb-modal fixed inset-0 z-50 hidden">
+                        <div class="fixed inset-0 bg-black/50" onclick="wdbCloseMethodModal(<?php echo $index; ?>)"></div>
+                        <div class="fixed inset-4 md:inset-10 lg:inset-20 bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+                            <!-- Modal Header -->
+                            <div class="p-6 border-b border-gray-200 flex items-center justify-between" style="background: linear-gradient(135deg, <?php echo $primary_color; ?>, <?php echo $secondary_color; ?>);">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-white text-xl">
+                                        <i class="<?php echo esc_attr($method['icon']); ?>"></i>
+                                    </div>
+                                    <div>
+                                        <h2 class="text-xl font-bold text-white"><?php echo esc_html($method['name']); ?></h2>
+                                        <p class="text-white/70 text-sm"><?php _e('Configure as opções deste método', 'wp-donate-brasil'); ?></p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <label class="wdb-switch" style="--slider-bg: rgba(255,255,255,0.3);">
+                                        <input type="checkbox" class="wdb-modal-switch" data-index="<?php echo $index; ?>"
+                                               <?php checked(!empty($method['enabled'])); ?>>
+                                        <span class="wdb-switch-slider"></span>
+                                        <span class="wdb-switch-label text-white"><?php _e('Ativo', 'wp-donate-brasil'); ?></span>
+                                    </label>
+                                    <button type="button" onclick="wdbCloseMethodModal(<?php echo $index; ?>)" class="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition-colors">
+                                        <i class="fa-solid fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Modal Body -->
+                            <div class="flex-1 overflow-y-auto p-6">
+                                <div class="max-w-2xl mx-auto space-y-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1"><?php _e('Instruções para o doador', 'wp-donate-brasil'); ?></label>
+                                        <textarea name="methods[<?php echo $index; ?>][instructions]" rows="3"
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                            placeholder="<?php esc_attr_e('Digite as instruções que aparecerão para o doador...', 'wp-donate-brasil'); ?>"><?php echo esc_textarea($method['instructions'] ?? ''); ?></textarea>
+                                    </div>
+                                    
+                                    <hr class="border-gray-200">
+                                    
+                                    <h3 class="font-bold text-gray-800"><?php _e('Configurações específicas', 'wp-donate-brasil'); ?></h3>
+                                    
+                                    <?php $this->render_method_fields($method, $index); ?>
+                                </div>
+                            </div>
+                            
+                            <!-- Modal Footer -->
+                            <div class="p-4 border-t border-gray-200 bg-gray-50 flex justify-end gap-3">
+                                <button type="button" onclick="wdbCloseMethodModal(<?php echo $index; ?>)" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg transition-colors">
+                                    <?php _e('Fechar', 'wp-donate-brasil'); ?>
+                                </button>
+                                <button type="button" onclick="wdbSaveAndCloseModal(<?php echo $index; ?>)" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors flex items-center gap-2">
+                                    <i class="fa-solid fa-check"></i>
+                                    <?php _e('Aplicar', 'wp-donate-brasil'); ?>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
                 </form>
                 
                 <div id="wdb-methods-message" class="hidden mt-4"></div>

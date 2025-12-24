@@ -360,6 +360,61 @@
 
 })(jQuery);
 
+// Funções para modais de métodos de pagamento
+function wdbOpenMethodModal(index) {
+    document.getElementById('wdb-modal-' + index).classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function wdbCloseMethodModal(index) {
+    document.getElementById('wdb-modal-' + index).classList.add('hidden');
+    document.body.style.overflow = '';
+}
+
+function wdbSaveAndCloseModal(index) {
+    wdbCloseMethodModal(index);
+}
+
+function wdbToggleMethodCard(checkbox, index) {
+    var card = checkbox.closest('.rounded-xl');
+    var badge = card.querySelector('.rounded-full');
+    var icon = card.querySelector('.w-14');
+    var modalSwitch = document.querySelector('.wdb-modal-switch[data-index="' + index + '"]');
+    
+    if (checkbox.checked) {
+        card.classList.remove('border-gray-200', 'bg-white');
+        card.classList.add('border-green-300', 'bg-green-50');
+        badge.classList.remove('bg-gray-200', 'text-gray-600');
+        badge.classList.add('bg-green-200', 'text-green-800');
+        badge.textContent = 'Ativo';
+        icon.classList.remove('text-gray-400');
+        icon.classList.add('text-green-600');
+    } else {
+        card.classList.remove('border-green-300', 'bg-green-50');
+        card.classList.add('border-gray-200', 'bg-white');
+        badge.classList.remove('bg-green-200', 'text-green-800');
+        badge.classList.add('bg-gray-200', 'text-gray-600');
+        badge.textContent = 'Inativo';
+        icon.classList.remove('text-green-600');
+        icon.classList.add('text-gray-400');
+    }
+    
+    // Sincroniza com o switch do modal
+    if (modalSwitch) {
+        modalSwitch.checked = checkbox.checked;
+    }
+}
+
+// Sincroniza switch do modal com o card
+jQuery(document).ready(function($) {
+    $('.wdb-modal-switch').on('change', function() {
+        var index = $(this).data('index');
+        var cardSwitch = $('input[name="methods[' + index + '][enabled]"]');
+        cardSwitch.prop('checked', this.checked).trigger('change');
+        wdbToggleMethodCard(cardSwitch[0], index);
+    });
+});
+
 // Função global para copiar shortcode
 function wdbCopyShortcode(text, btn) {
     // Cria textarea temporário para copiar
