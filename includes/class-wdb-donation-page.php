@@ -1846,9 +1846,17 @@ class WDB_Donation_Page {
                     <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
                         <?php echo esc_html($settings['gallery_title'] ?? __('Nossos Doadores', 'wp-donate-brasil')); ?>
                     </h1>
-                    <p class="text-lg text-gray-500 max-w-2xl mx-auto">
+                    <p class="text-lg text-gray-500 max-w-2xl mx-auto mb-6">
                         <?php printf(__('Agradecemos a cada um dos nossos %d apoiadores que tornaram isso possível', 'wp-donate-brasil'), $total); ?>
                     </p>
+                    <?php 
+                    $donation_page_id = get_option('wdb_donation_page_id');
+                    $donation_page_url = $donation_page_id ? get_permalink($donation_page_id) : home_url('/doacoes/');
+                    ?>
+                    <a href="<?php echo esc_url($donation_page_url); ?>" class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-semibold transition-all hover:opacity-90 hover:shadow-lg" style="background: linear-gradient(135deg, <?php echo $primary_color; ?>, <?php echo $secondary_color; ?>);">
+                        <i class="fas fa-arrow-left"></i>
+                        <?php _e('Voltar para página de doações', 'wp-donate-brasil'); ?>
+                    </a>
                 </div>
                 
                 <?php if ($filter_search_enabled || $filter_method_enabled || $filter_month_enabled || $filter_order_enabled): 
