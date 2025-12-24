@@ -31,6 +31,7 @@ class WDB_Admin {
         add_action('wp_ajax_wdb_clear_cache', array($this, 'ajax_clear_cache'));
         add_action('wp_ajax_wdb_clear_transients', array($this, 'ajax_clear_transients'));
         add_action('wp_ajax_wdb_delete_all_donations', array($this, 'ajax_delete_all_donations'));
+        add_action('wp_ajax_wdb_add_manual_donation', array($this, 'ajax_add_manual_donation'));
     }
     
     public function add_admin_menu() {
@@ -1064,6 +1065,10 @@ class WDB_Admin {
                             <p class="text-white/90 mt-1"><?php _e('Gerencie os comprovantes enviados pelos doadores', 'wp-donate-brasil'); ?></p>
                         </div>
                         <div class="flex items-center gap-4 text-sm">
+                            <button type="button" id="wdb-add-donation-btn" class="flex items-center gap-2 px-4 py-2.5 bg-white text-gray-700 rounded-lg font-semibold shadow-md hover:shadow-lg transition-all">
+                                <i class="fa-solid fa-plus"></i>
+                                <?php _e('Adicionar Doação', 'wp-donate-brasil'); ?>
+                            </button>
                             <div class="rounded-lg px-4 py-2 text-white" style="background: rgba(0,0,0,0.25);">
                                 <span class="opacity-80"><?php _e('Total:', 'wp-donate-brasil'); ?></span>
                                 <span class="font-bold text-xl ml-1"><?php echo $counts['all']; ?></span>
@@ -1223,6 +1228,7 @@ class WDB_Admin {
                                     <td class="px-5 py-4">
                                         <?php 
                                         $method_colors = array(
+                                            'cash' => 'wdb-cash-tag',
                                             'pix' => 'bg-green-100 text-green-700',
                                             'bank_transfer' => 'bg-blue-100 text-blue-700',
                                             'bitcoin' => 'bg-orange-100 text-orange-700',
@@ -1231,6 +1237,7 @@ class WDB_Admin {
                                             'wise' => 'wdb-wise-tag'
                                         );
                                         $method_names = array(
+                                            'cash' => __('Dinheiro', 'wp-donate-brasil'),
                                             'pix' => 'PIX',
                                             'bank_transfer' => __('Transferência Bancária', 'wp-donate-brasil'),
                                             'bitcoin' => 'Bitcoin',
@@ -1478,6 +1485,7 @@ class WDB_Admin {
                             <label class="block text-sm font-medium text-gray-700 mb-1"><?php _e('Método de Pagamento', 'wp-donate-brasil'); ?></label>
                             <select name="donation_method" id="edit-donation-method"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="cash"><?php _e('Dinheiro (Espécie)', 'wp-donate-brasil'); ?></option>
                                 <option value="pix">PIX</option>
                                 <option value="bank_transfer"><?php _e('Transferência Bancária', 'wp-donate-brasil'); ?></option>
                                 <option value="bitcoin">Bitcoin</option>
@@ -1541,15 +1549,114 @@ class WDB_Admin {
             </div>
         </div>
         
+        <!-- Modal Adicionar Doação Manual -->
+        <div id="wdb-add-modal" class="fixed inset-0 z-[99999] hidden">
+            <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="wdb-add-overlay"></div>
+            <div class="absolute inset-4 md:inset-10 flex items-center justify-center">
+                <div class="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-full overflow-hidden">
+                    <div class="p-4 border-b border-gray-200" style="background: linear-gradient(135deg, <?php echo $primary_color; ?>, <?php echo $secondary_color; ?>);">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-plus-circle"></i>
+                                <?php _e('Adicionar Doação Manual', 'wp-donate-brasil'); ?>
+                            </h3>
+                            <button type="button" id="wdb-add-close" class="p-2 text-white/80 hover:text-white hover:bg-white/20 rounded-lg transition-colors">
+                                <i class="fa-solid fa-times text-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <form id="wdb-add-form" class="p-5 space-y-4 overflow-auto" style="max-height: calc(100vh - 200px);">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1"><?php _e('Nome', 'wp-donate-brasil'); ?> *</label>
+                                <input type="text" name="donor_name" id="add-donor-name" required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1"><?php _e('E-mail', 'wp-donate-brasil'); ?> *</label>
+                                <input type="email" name="donor_email" id="add-donor-email" required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1"><?php _e('Telefone', 'wp-donate-brasil'); ?></label>
+                                <input type="tel" name="donor_phone" id="add-donor-phone"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1"><?php _e('Valor (R$)', 'wp-donate-brasil'); ?></label>
+                                <input type="text" name="donation_amount" id="add-donation-amount"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent wdb-money-mask"
+                                    placeholder="0,00">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1"><?php _e('Método de Pagamento', 'wp-donate-brasil'); ?></label>
+                            <select name="donation_method" id="add-donation-method"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="cash"><?php _e('Dinheiro (Espécie)', 'wp-donate-brasil'); ?></option>
+                                <option value="pix">PIX</option>
+                                <option value="bank_transfer"><?php _e('Transferência Bancária', 'wp-donate-brasil'); ?></option>
+                                <option value="bitcoin">Bitcoin</option>
+                                <option value="paypal">PayPal</option>
+                                <option value="payment_link"><?php _e('Link de Pagamento', 'wp-donate-brasil'); ?></option>
+                                <option value="wise">Wise</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1"><?php _e('Observação', 'wp-donate-brasil'); ?></label>
+                            <textarea name="donor_message" id="add-donor-message" rows="2"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="<?php esc_attr_e('Ex: Recebido em mãos no evento...', 'wp-donate-brasil'); ?>"></textarea>
+                        </div>
+                        
+                        <div class="flex items-center gap-3 flex-wrap" style="font-size: 13px;">
+                            <label class="wdb-switch" style="padding: 6px 10px; background: #f3f4f6; border-radius: 6px;">
+                                <input type="checkbox" name="anonymous" id="add-anonymous" value="1">
+                                <span class="wdb-switch-slider"></span>
+                                <span class="wdb-switch-label"><?php _e('Anônimo', 'wp-donate-brasil'); ?></span>
+                            </label>
+                            <label class="wdb-switch" style="padding: 6px 10px; background: #f3f4f6; border-radius: 6px;">
+                                <input type="checkbox" name="show_in_gallery" id="add-gallery" value="1" checked>
+                                <span class="wdb-switch-slider"></span>
+                                <span class="wdb-switch-label"><?php _e('Galeria', 'wp-donate-brasil'); ?></span>
+                            </label>
+                            <label class="wdb-switch" style="padding: 6px 10px; background: #fef3c7; border-radius: 6px; border: 1px solid #fcd34d;">
+                                <input type="checkbox" name="status_approved" id="add-status-approved" value="1" checked onchange="wdbUpdateStatusLabel(this)">
+                                <span class="wdb-switch-slider"></span>
+                                <span class="wdb-switch-label" id="add-status-label" style="color: #065f46; font-weight: 600;"><?php _e('Aprovado', 'wp-donate-brasil'); ?></span>
+                            </label>
+                        </div>
+                        
+                        <div class="flex items-center justify-end gap-3 pt-4 border-t border-gray-200">
+                            <button type="button" id="wdb-add-cancel" class="px-5 py-2.5 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg font-medium transition-colors">
+                                <?php _e('Cancelar', 'wp-donate-brasil'); ?>
+                            </button>
+                            <button type="submit" class="px-5 py-2.5 text-white rounded-lg font-semibold transition-all flex items-center gap-2" style="background: linear-gradient(135deg, <?php echo $primary_color; ?>, <?php echo $secondary_color; ?>);">
+                                <i class="fa-solid fa-save"></i> <?php _e('Salvar', 'wp-donate-brasil'); ?>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
         <style>
             .wdb-receipts-page .wrap { max-width: 100%; margin: 0; padding: 0; }
-            #wdb-lightbox-modal.active, #wdb-edit-modal.active { display: block; animation: fadeIn 0.3s ease; }
+            #wdb-lightbox-modal.active, #wdb-edit-modal.active, #wdb-add-modal.active { display: block; animation: fadeIn 0.3s ease; }
             @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
             #wdb-lightbox-content img { max-width: 100%; height: auto; border-radius: 8px; }
             #wdb-lightbox-content iframe { width: 100%; height: 70vh; border: none; border-radius: 8px; }
             
             /* Tag Wise - verde fluorescente */
             .wdb-wise-tag { background: #a3e635; color: #1a1a1a; }
+            
+            /* Tag Dinheiro - amarelo dourado */
+            .wdb-cash-tag { background: #fcd34d; color: #1a1a1a; }
             
             /* Switches */
             .wdb-switch { position: relative; display: inline-flex; align-items: center; cursor: pointer; }
@@ -1698,6 +1805,64 @@ class WDB_Admin {
                         submitBtn.html(originalText).prop('disabled', false);
                     }
                 });
+            });
+            
+            // Abrir modal de adicionar doação
+            $('#wdb-add-donation-btn').on('click', function() {
+                $('#wdb-add-form')[0].reset();
+                $('#add-gallery').prop('checked', true);
+                $('#add-status-approved').prop('checked', true);
+                wdbUpdateStatusLabel(document.getElementById('add-status-approved'));
+                $('#wdb-add-modal').addClass('active');
+            });
+            
+            $('#wdb-add-close, #wdb-add-cancel, #wdb-add-overlay').on('click', function() {
+                $('#wdb-add-modal').removeClass('active');
+            });
+            
+            // Salvar doação manual
+            $('#wdb-add-form').on('submit', function(e) {
+                e.preventDefault();
+                var form = $(this);
+                var submitBtn = form.find('button[type="submit"]');
+                var originalText = submitBtn.html();
+                
+                submitBtn.html('<i class="fa-solid fa-spinner fa-spin mr-1"></i> Salvando...').prop('disabled', true);
+                
+                $.ajax({
+                    url: ajaxurl,
+                    type: 'POST',
+                    data: {
+                        action: 'wdb_add_manual_donation',
+                        nonce: wdb_admin.nonce,
+                        donor_name: $('#add-donor-name').val(),
+                        donor_email: $('#add-donor-email').val(),
+                        donor_phone: $('#add-donor-phone').val(),
+                        donation_method: $('#add-donation-method').val(),
+                        donation_amount: $('#add-donation-amount').val(),
+                        donor_message: $('#add-donor-message').val(),
+                        anonymous: $('#add-anonymous').is(':checked') ? 1 : 0,
+                        show_in_gallery: $('#add-gallery').is(':checked') ? 1 : 0,
+                        status: $('#add-status-approved').is(':checked') ? 'approved' : 'pending'
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            location.reload();
+                        } else {
+                            alert(response.data.message || 'Erro ao salvar');
+                            submitBtn.html(originalText).prop('disabled', false);
+                        }
+                    },
+                    error: function() {
+                        alert('Erro de conexão');
+                        submitBtn.html(originalText).prop('disabled', false);
+                    }
+                });
+            });
+            
+            // Máscara de dinheiro no modal de adicionar
+            $('#add-donation-amount').on('input', function() {
+                $(this).val(wdbFormatMoney($(this).val()));
             });
         });
         </script>
@@ -1964,6 +2129,62 @@ class WDB_Admin {
         wp_send_json_success(array(
             'message' => sprintf(__('Todas as %d doações e suas mídias foram deletadas permanentemente!', 'wp-donate-brasil'), $total)
         ));
+    }
+    
+    // Adiciona doação manual pelo admin
+    public function ajax_add_manual_donation() {
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array('message' => __('Sem permissão.', 'wp-donate-brasil')));
+        }
+        
+        if (!wp_verify_nonce($_POST['nonce'] ?? '', 'wdb_nonce_action')) {
+            wp_send_json_error(array('message' => __('Erro de segurança.', 'wp-donate-brasil')));
+        }
+        
+        $donor_name = sanitize_text_field($_POST['donor_name'] ?? '');
+        $donor_email = sanitize_email($_POST['donor_email'] ?? '');
+        
+        if (empty($donor_name) || empty($donor_email)) {
+            wp_send_json_error(array('message' => __('Nome e e-mail são obrigatórios.', 'wp-donate-brasil')));
+        }
+        
+        $donor_phone = sanitize_text_field($_POST['donor_phone'] ?? '');
+        $donation_method = sanitize_text_field($_POST['donation_method'] ?? 'cash');
+        $donation_amount_raw = sanitize_text_field($_POST['donation_amount'] ?? '0');
+        $donation_amount = floatval(str_replace(array('.', ','), array('', '.'), $donation_amount_raw));
+        $message = sanitize_textarea_field($_POST['donor_message'] ?? '');
+        $anonymous = intval($_POST['anonymous'] ?? 0);
+        $show_in_gallery = intval($_POST['show_in_gallery'] ?? 1);
+        $status = sanitize_text_field($_POST['status'] ?? 'approved');
+        
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'wdb_receipts';
+        
+        $result = $wpdb->insert($table_name, array(
+            'donor_name' => $donor_name,
+            'donor_email' => $donor_email,
+            'donor_phone' => $donor_phone,
+            'donation_method' => $donation_method,
+            'donation_amount' => $donation_amount,
+            'receipt_file' => '',
+            'attachment_id' => 0,
+            'message' => $message,
+            'status' => $status,
+            'show_in_gallery' => $show_in_gallery,
+            'anonymous' => $anonymous,
+            'donor_ip' => '',
+            'donor_country' => 'Manual',
+            'donor_state' => '',
+            'donor_city' => '',
+            'created_at' => current_time('mysql')
+        ), array('%s', '%s', '%s', '%s', '%f', '%s', '%d', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s', '%s'));
+        
+        if ($result === false) {
+            wp_send_json_error(array('message' => __('Erro ao salvar doação.', 'wp-donate-brasil')));
+        }
+        
+        wp_cache_flush();
+        wp_send_json_success(array('message' => __('Doação adicionada com sucesso!', 'wp-donate-brasil')));
     }
     
     // Página Dashboard com relatórios e gráficos
