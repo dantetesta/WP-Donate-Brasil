@@ -22,6 +22,85 @@
 
 ---
 
+## 📸 Screenshots
+
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/01-dashboard.jpg" target="_blank">
+        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/01-dashboard.jpg" alt="Dashboard" width="250"/>
+      </a>
+      <br><strong>Dashboard</strong>
+    </td>
+    <td align="center" width="33%">
+      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/02-comprovantes.jpg" target="_blank">
+        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/02-comprovantes.jpg" alt="Comprovantes" width="250"/>
+      </a>
+      <br><strong>Comprovantes</strong>
+    </td>
+    <td align="center" width="33%">
+      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/03-metodos-pagamento.jpg" target="_blank">
+        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/03-metodos-pagamento.jpg" alt="Métodos de Pagamento" width="250"/>
+      </a>
+      <br><strong>Métodos de Pagamento</strong>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="33%">
+      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/04-configuracoes-pagina.jpg" target="_blank">
+        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/04-configuracoes-pagina.jpg" alt="Configurações" width="250"/>
+      </a>
+      <br><strong>Configurações</strong>
+    </td>
+    <td align="center" width="33%">
+      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/05-galeria-doadores.jpg" target="_blank">
+        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/05-galeria-doadores.jpg" alt="Galeria de Doadores" width="250"/>
+      </a>
+      <br><strong>Galeria de Doadores</strong>
+    </td>
+    <td align="center" width="33%">
+      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/06-emails.jpg" target="_blank">
+        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/06-emails.jpg" alt="E-mails" width="250"/>
+      </a>
+      <br><strong>E-mails</strong>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="33%">
+      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/07-ferramentas.jpg" target="_blank">
+        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/07-ferramentas.jpg" alt="Ferramentas" width="250"/>
+      </a>
+      <br><strong>Ferramentas</strong>
+    </td>
+    <td align="center" width="33%">
+      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/08-pagina-publica.jpg" target="_blank">
+        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/08-pagina-publica.jpg" alt="Página Pública" width="250"/>
+      </a>
+      <br><strong>Página Pública</strong>
+    </td>
+    <td align="center" width="33%">
+      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/09-formulario-doacao.jpg" target="_blank">
+        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/09-formulario-doacao.jpg" alt="Formulário de Doação" width="250"/>
+      </a>
+      <br><strong>Formulário de Doação</strong>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="33%">
+      <a href="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/10-offcanvas-metodo.jpg" target="_blank">
+        <img src="https://raw.githubusercontent.com/dantetesta/WP-Donate-Brasil/main/admin/images/10-offcanvas-metodo.jpg" alt="Offcanvas Método" width="250"/>
+      </a>
+      <br><strong>Configurar Método</strong>
+    </td>
+    <td align="center" width="33%"></td>
+    <td align="center" width="33%"></td>
+  </tr>
+</table>
+
+> 💡 **Dica:** Clique nas imagens para ver em tamanho maior
+
+---
+
 ## 📋 Sobre
 
 O **WP Donate Brasil** é um plugin WordPress desenvolvido especialmente para o mercado brasileiro, oferecendo uma solução completa para receber doações com **PIX**, transferência bancária, Bitcoin e muito mais.
