@@ -330,14 +330,6 @@ O plugin segue as melhores práticas de segurança do WordPress:
 | PHP | 7.4+ |
 | MySQL | 5.7+ |
 
-### Testado com:
-
-- ✅ Elementor
-- ✅ WooCommerce
-- ✅ Yoast SEO
-- ✅ Contact Form 7
-- ✅ Cache plugins (WP Super Cache, W3 Total Cache)
-
 ---
 
 ## 📈 Changelog
