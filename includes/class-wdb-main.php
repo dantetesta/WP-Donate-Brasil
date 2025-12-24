@@ -286,11 +286,20 @@ class WDB_Main {
         global $wpdb;
         $table_name = $wpdb->prefix . 'wdb_receipts';
         
-        // Garante que colunas de geolocalização existam
-        $wpdb->query("ALTER TABLE $table_name ADD COLUMN IF NOT EXISTS donor_ip varchar(45) DEFAULT NULL");
-        $wpdb->query("ALTER TABLE $table_name ADD COLUMN IF NOT EXISTS donor_country varchar(100) DEFAULT 'Anônimo'");
-        $wpdb->query("ALTER TABLE $table_name ADD COLUMN IF NOT EXISTS donor_state varchar(100) DEFAULT 'Anônimo'");
-        $wpdb->query("ALTER TABLE $table_name ADD COLUMN IF NOT EXISTS donor_city varchar(100) DEFAULT 'Anônimo'");
+        // Garante que colunas de geolocalização existam (compatível com todas versões MySQL)
+        $columns = $wpdb->get_col("SHOW COLUMNS FROM $table_name");
+        if (!in_array('donor_ip', $columns)) {
+            $wpdb->query("ALTER TABLE $table_name ADD COLUMN donor_ip varchar(45) DEFAULT NULL");
+        }
+        if (!in_array('donor_country', $columns)) {
+            $wpdb->query("ALTER TABLE $table_name ADD COLUMN donor_country varchar(100) DEFAULT 'Anônimo'");
+        }
+        if (!in_array('donor_state', $columns)) {
+            $wpdb->query("ALTER TABLE $table_name ADD COLUMN donor_state varchar(100) DEFAULT 'Anônimo'");
+        }
+        if (!in_array('donor_city', $columns)) {
+            $wpdb->query("ALTER TABLE $table_name ADD COLUMN donor_city varchar(100) DEFAULT 'Anônimo'");
+        }
         
         // Captura IP e geolocalização
         $geo_data = self::get_geolocation_by_ip();
