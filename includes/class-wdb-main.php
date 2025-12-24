@@ -286,6 +286,12 @@ class WDB_Main {
         global $wpdb;
         $table_name = $wpdb->prefix . 'wdb_receipts';
         
+        // Garante que colunas de geolocalização existam
+        $wpdb->query("ALTER TABLE $table_name ADD COLUMN IF NOT EXISTS donor_ip varchar(45) DEFAULT NULL");
+        $wpdb->query("ALTER TABLE $table_name ADD COLUMN IF NOT EXISTS donor_country varchar(100) DEFAULT 'Anônimo'");
+        $wpdb->query("ALTER TABLE $table_name ADD COLUMN IF NOT EXISTS donor_state varchar(100) DEFAULT 'Anônimo'");
+        $wpdb->query("ALTER TABLE $table_name ADD COLUMN IF NOT EXISTS donor_city varchar(100) DEFAULT 'Anônimo'");
+        
         // Captura IP e geolocalização
         $geo_data = self::get_geolocation_by_ip();
         
@@ -309,7 +315,7 @@ class WDB_Main {
         ), array('%s', '%s', '%s', '%s', '%f', '%s', '%d', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s', '%s'));
         
         if ($result === false) {
-            wp_send_json_error(array('message' => __('Erro ao salvar. Tente novamente.', 'wp-donate-brasil')));
+            wp_send_json_error(array('message' => __('Erro ao salvar. Tente novamente.', 'wp-donate-brasil') . ' [DB: ' . $wpdb->last_error . ']'));
         }
         
         // Envia emails de notificação

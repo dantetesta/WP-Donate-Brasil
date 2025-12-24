@@ -147,6 +147,9 @@
     padding: 12px 16px;
     border-radius: 8px;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 #wdb-form-message.success {

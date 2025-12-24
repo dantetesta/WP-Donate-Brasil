@@ -209,6 +209,12 @@ $methods_count = count($active_methods);
         /* Form message */
         #wdb-form-message {
             transition: all 0.3s;
+            padding: 12px 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
         }
         
         #wdb-form-message.success {
