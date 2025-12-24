@@ -2,7 +2,7 @@
   <img src="https://img.shields.io/badge/WordPress-6.0+-blue?style=for-the-badge&logo=wordpress" alt="WordPress">
   <img src="https://img.shields.io/badge/PHP-7.4+-purple?style=for-the-badge&logo=php" alt="PHP">
   <img src="https://img.shields.io/badge/License-GPL%20v2-green?style=for-the-badge" alt="License">
-  <img src="https://img.shields.io/badge/Version-2.0.1-orange?style=for-the-badge" alt="Version">
+  <img src="https://img.shields.io/badge/Version-2.0.2-orange?style=for-the-badge" alt="Version">
 </p>
 
 <h1 align="center">🙏 WP Donate Brasil</h1>
@@ -333,6 +333,15 @@ O plugin segue as melhores práticas de segurança do WordPress:
 ---
 
 ## 📈 Changelog
+
+### 2.0.2 (23/12/2025)
+- 🆕 Sistema de Tabs nas Configurações (Página, Galeria, E-mails, Ferramentas)
+- 🆕 Grid de cards para Métodos de Pagamento
+- 🆕 Offcanvas para configurar cada método (slide da direita)
+- 🆕 Switch de ativar/desativar nos cards de métodos
+- 🆕 Botão copiar nos shortcodes
+- 🔧 Notificação apenas toast flutuante (removida interna)
+- 🔧 Melhorias de UX e responsividade
 
 ### 2.0.1 (23/12/2025)
 - 🔧 Bitcoin exibe ícone ao invés de QR Code
