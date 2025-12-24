@@ -1296,6 +1296,9 @@ class WDB_Admin {
                                                     data-anonymous="<?php echo esc_attr($receipt->anonymous ?? 0); ?>"
                                                     data-gallery="<?php echo esc_attr($receipt->show_in_gallery ?? 1); ?>"
                                                     data-status="<?php echo esc_attr($receipt->status); ?>"
+                                                    data-city="<?php echo esc_attr($receipt->donor_city ?? ''); ?>"
+                                                    data-state="<?php echo esc_attr($receipt->donor_state ?? ''); ?>"
+                                                    data-country="<?php echo esc_attr($receipt->donor_country ?? ''); ?>"
                                                     title="<?php esc_attr_e('Editar', 'wp-donate-brasil'); ?>">
                                                 <i class="fa-solid fa-pen text-lg"></i>
                                             </button>
@@ -1425,14 +1428,20 @@ class WDB_Admin {
             <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="wdb-edit-overlay"></div>
             <div class="absolute inset-4 md:inset-10 flex items-center justify-center">
                 <div class="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-full overflow-hidden">
-                    <div class="flex items-center justify-between p-4 border-b border-gray-200" style="background: linear-gradient(135deg, <?php echo $primary_color; ?>, <?php echo $secondary_color; ?>);">
-                        <h3 class="font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-pen"></i>
-                            <?php _e('Editar Doação', 'wp-donate-brasil'); ?>
-                        </h3>
-                        <button type="button" id="wdb-edit-close" class="p-2 text-white/80 hover:text-white hover:bg-white/20 rounded-lg transition-colors">
-                            <i class="fa-solid fa-times text-xl"></i>
-                        </button>
+                    <div class="p-4 border-b border-gray-200" style="background: linear-gradient(135deg, <?php echo $primary_color; ?>, <?php echo $secondary_color; ?>);">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-pen"></i>
+                                <?php _e('Editar Doação', 'wp-donate-brasil'); ?>
+                            </h3>
+                            <button type="button" id="wdb-edit-close" class="p-2 text-white/80 hover:text-white hover:bg-white/20 rounded-lg transition-colors">
+                                <i class="fa-solid fa-times text-xl"></i>
+                            </button>
+                        </div>
+                        <div id="edit-location-info" class="mt-2 text-white/80 text-xs flex items-center gap-1" style="display: none;">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span id="edit-location-text"></span>
+                        </div>
                     </div>
                     <form id="wdb-edit-form" class="p-5 space-y-4 overflow-auto" style="max-height: calc(100vh - 200px);">
                         <input type="hidden" name="receipt_id" id="edit-receipt-id">
@@ -1626,6 +1635,22 @@ class WDB_Admin {
                 var isApproved = btn.data('status') === 'approved';
                 $('#edit-status-approved').prop('checked', isApproved);
                 wdbUpdateStatusLabel(document.getElementById('edit-status-approved'));
+                
+                // Exibe localização se disponível
+                var city = btn.data('city') || '';
+                var state = btn.data('state') || '';
+                var country = btn.data('country') || '';
+                var locationParts = [];
+                if (city && city !== 'Anônimo') locationParts.push(city);
+                if (state && state !== 'Anônimo') locationParts.push(state);
+                if (country && country !== 'Anônimo') locationParts.push(country);
+                
+                if (locationParts.length > 0) {
+                    $('#edit-location-text').text(locationParts.join(', '));
+                    $('#edit-location-info').show();
+                } else {
+                    $('#edit-location-info').hide();
+                }
                 
                 $('#wdb-edit-modal').addClass('active');
             });
