@@ -271,7 +271,6 @@ Instruções: Clique no botão para doar via gateway.
 |-----------|-----------|
 | `[wp_donate_brasil_page]` | Página completa de doações |
 | `[wp_donate_brasil_gallery]` | Apenas galeria de doadores |
-| `[wp_donate_brasil_fullpage]` | Página isolada (template próprio) |
 | `[wdb_donors_list]` | Lista completa de doadores (com paginação) |
 
 ---
