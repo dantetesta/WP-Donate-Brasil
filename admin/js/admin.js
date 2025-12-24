@@ -360,14 +360,40 @@
 
 })(jQuery);
 
-// Funções para modais de métodos de pagamento
+// Funções para offcanvas de métodos de pagamento
 function wdbOpenMethodModal(index) {
-    document.getElementById('wdb-modal-' + index).classList.remove('hidden');
+    var offcanvas = document.getElementById('wdb-modal-' + index);
+    var backdrop = offcanvas.querySelector('.bg-black\\/50');
+    var panel = offcanvas.querySelector('.max-w-lg');
+    
+    offcanvas.classList.remove('invisible');
+    
+    // Anima após um frame
+    requestAnimationFrame(function() {
+        backdrop.classList.remove('opacity-0');
+        backdrop.classList.add('opacity-100');
+        panel.classList.remove('translate-x-full');
+        panel.classList.add('translate-x-0');
+    });
+    
     document.body.style.overflow = 'hidden';
 }
 
 function wdbCloseMethodModal(index) {
-    document.getElementById('wdb-modal-' + index).classList.add('hidden');
+    var offcanvas = document.getElementById('wdb-modal-' + index);
+    var backdrop = offcanvas.querySelector('.bg-black\\/50');
+    var panel = offcanvas.querySelector('.max-w-lg');
+    
+    backdrop.classList.remove('opacity-100');
+    backdrop.classList.add('opacity-0');
+    panel.classList.remove('translate-x-0');
+    panel.classList.add('translate-x-full');
+    
+    // Esconde após animação
+    setTimeout(function() {
+        offcanvas.classList.add('invisible');
+    }, 300);
+    
     document.body.style.overflow = '';
 }
 
