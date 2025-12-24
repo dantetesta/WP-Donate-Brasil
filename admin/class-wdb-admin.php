@@ -1474,6 +1474,7 @@ class WDB_Admin {
                                 <option value="bitcoin">Bitcoin</option>
                                 <option value="paypal">PayPal</option>
                                 <option value="payment_link"><?php _e('Link de Pagamento', 'wp-donate-brasil'); ?></option>
+                                <option value="wise">Wise</option>
                             </select>
                         </div>
                         
