@@ -1953,14 +1953,22 @@ class WDB_Admin {
             'email_donor_approved_body' => sanitize_textarea_field($_POST['email_donor_approved_body'] ?? '')
         );
         
-        // Força atualização removendo cache
+        // Força atualização removendo cache e opção antiga
         delete_transient('wdb_settings_cache');
         wp_cache_delete('wdb_page_settings', 'options');
+        wp_cache_delete('alloptions', 'options');
         
-        $result = update_option('wdb_page_settings', $settings, true);
+        // Remove opção antiga e recria para forçar atualização
+        delete_option('wdb_page_settings');
+        $result = add_option('wdb_page_settings', $settings, '', 'yes');
         
-        // Limpa cache após salvar
+        // Limpa todos os caches após salvar
         wp_cache_flush();
+        
+        // Limpa object cache se existir
+        if (function_exists('wp_cache_flush_runtime')) {
+            wp_cache_flush_runtime();
+        }
         
         // Debug log
         error_log('WDB Settings saved: ' . ($result ? 'SUCCESS' : 'FAILED') . ' - show_credits: ' . ($settings['show_credits'] ? 'true' : 'false') . ' - primary_color: ' . $settings['primary_color']);

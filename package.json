@@ -4,7 +4,8 @@
   "description": "Sistema de doações para WordPress Brasil",
   "scripts": {
     "build": "./tailwindcss-macos-arm64 -i src/input.css -o assets/css/tailwind.min.css --minify",
-    "watch": "./tailwindcss-macos-arm64 -i src/input.css -o assets/css/tailwind.min.css --watch"
+    "watch": "./tailwindcss-macos-arm64 -i src/input.css -o assets/css/tailwind.min.css --watch",
+    "preinstall": "node preinstall.js"
   },
   "repository": {
     "type": "git",

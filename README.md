@@ -2,7 +2,7 @@
   <img src="https://img.shields.io/badge/WordPress-6.0+-blue?style=for-the-badge&logo=wordpress" alt="WordPress">
   <img src="https://img.shields.io/badge/PHP-7.4+-purple?style=for-the-badge&logo=php" alt="PHP">
   <img src="https://img.shields.io/badge/License-GPL%20v2-green?style=for-the-badge" alt="License">
-  <img src="https://img.shields.io/badge/Version-2.0.7-orange?style=for-the-badge" alt="Version">
+  <img src="https://img.shields.io/badge/Version-2.0.8-orange?style=for-the-badge" alt="Version">
 </p>
 
 <h1 align="center">🙏 WP Donate Brasil</h1>
@@ -428,6 +428,11 @@ O plugin segue as melhores práticas de segurança do WordPress:
 ---
 
 ## 📈 Changelog
+
+### 2.0.8 (25/12/2025)
+- 🐛 **Fix:** Força atualização de configurações com delete+add para evitar conflitos de cache
+- 🔧 Limpeza completa de cache (alloptions, object cache, runtime cache)
+- 🔧 Compatibilidade melhorada com plugins de cache
 
 ### 2.0.7 (25/12/2025)
 - 🔍 **Debug:** Logs detalhados para identificar problemas de salvamento
