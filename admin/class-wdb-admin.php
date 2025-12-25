@@ -1891,13 +1891,17 @@ class WDB_Admin {
             wp_send_json_error(array('message' => __('Erro de segurança.', 'wp-donate-brasil')));
         }
         
+        // Sanitiza cores com fallback
+        $primary_color = sanitize_hex_color($_POST['primary_color'] ?? '');
+        $secondary_color = sanitize_hex_color($_POST['secondary_color'] ?? '');
+        
         $settings = array(
             'page_highlight' => sanitize_text_field($_POST['page_highlight'] ?? 'Transforme vidas com sua doação'),
             'page_title' => sanitize_text_field($_POST['page_title'] ?? ''),
             'page_subtitle' => sanitize_text_field($_POST['page_subtitle'] ?? ''),
             'page_description' => sanitize_textarea_field($_POST['page_description'] ?? ''),
-            'primary_color' => sanitize_hex_color($_POST['primary_color'] ?? '#3B82F6'),
-            'secondary_color' => sanitize_hex_color($_POST['secondary_color'] ?? '#10B981'),
+            'primary_color' => $primary_color ? $primary_color : '#3B82F6',
+            'secondary_color' => $secondary_color ? $secondary_color : '#10B981',
             'show_gallery' => isset($_POST['show_gallery']),
             'gallery_title' => sanitize_text_field($_POST['gallery_title'] ?? ''),
             'items_per_page' => intval($_POST['items_per_page'] ?? 12),
@@ -1939,8 +1943,17 @@ class WDB_Admin {
             'email_donor_approved_body' => sanitize_textarea_field($_POST['email_donor_approved_body'] ?? '')
         );
         
-        update_option('wdb_page_settings', $settings);
+        // Força atualização removendo cache
+        delete_transient('wdb_settings_cache');
+        wp_cache_delete('wdb_page_settings', 'options');
+        
+        $result = update_option('wdb_page_settings', $settings, true);
+        
+        // Limpa cache após salvar
         wp_cache_flush();
+        
+        // Debug log
+        error_log('WDB Settings saved: ' . ($result ? 'SUCCESS' : 'FAILED') . ' - show_credits: ' . ($settings['show_credits'] ? 'true' : 'false') . ' - primary_color: ' . $settings['primary_color']);
         
         wp_send_json_success(array('message' => __('Configurações salvas!', 'wp-donate-brasil')));
     }
