@@ -597,10 +597,12 @@ $methods_count = count($active_methods);
             <p class="text-white/50 text-sm">
                 <?php printf(__('© %s %s. Todos os direitos reservados.', 'wp-donate-brasil'), date('Y'), $site_name); ?>
             </p>
+            <?php if ($settings['show_credits'] ?? true): ?>
             <p class="text-white/30 text-xs mt-2">
                 <?php _e('Desenvolvido com', 'wp-donate-brasil'); ?> <i class="fa-solid fa-heart text-red-400"></i> <?php _e('por', 'wp-donate-brasil'); ?> 
                 <a href="https://dantetesta.com.br" target="_blank" class="text-white/50 hover:text-white transition-colors">Dante Testa</a>
             </p>
+            <?php endif; ?>
         </div>
     </footer>
     
