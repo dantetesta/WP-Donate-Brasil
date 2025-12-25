@@ -1891,9 +1891,19 @@ class WDB_Admin {
             wp_send_json_error(array('message' => __('Erro de segurança.', 'wp-donate-brasil')));
         }
         
-        // Sanitiza cores com fallback
-        $primary_color = sanitize_hex_color($_POST['primary_color'] ?? '');
-        $secondary_color = sanitize_hex_color($_POST['secondary_color'] ?? '');
+        // Debug: Log dados recebidos
+        error_log('WDB POST RAW: ' . print_r($_POST, true));
+        
+        // Sanitiza cores com fallback - verifica se veio vazio
+        $raw_primary = isset($_POST['primary_color']) ? $_POST['primary_color'] : '';
+        $raw_secondary = isset($_POST['secondary_color']) ? $_POST['secondary_color'] : '';
+        
+        error_log('WDB RAW COLORS: primary=' . $raw_primary . ' secondary=' . $raw_secondary);
+        
+        $primary_color = sanitize_hex_color($raw_primary);
+        $secondary_color = sanitize_hex_color($raw_secondary);
+        
+        error_log('WDB SANITIZED COLORS: primary=' . ($primary_color ?: 'NULL') . ' secondary=' . ($secondary_color ?: 'NULL'));
         
         $settings = array(
             'page_highlight' => sanitize_text_field($_POST['page_highlight'] ?? 'Transforme vidas com sua doação'),

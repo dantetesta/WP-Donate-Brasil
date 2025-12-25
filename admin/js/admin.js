@@ -133,10 +133,17 @@
 
             $btn.prop('disabled', true).html('<i class="fa-solid fa-spinner fa-spin mr-2"></i> Salvando...');
 
+            // Debug: Log dos dados serializados
+            var formData = $form.serialize();
+            console.log('WDB Form Data:', formData);
+            console.log('WDB Primary Color:', $form.find('input[name="primary_color"]').val());
+            console.log('WDB Secondary Color:', $form.find('input[name="secondary_color"]').val());
+            console.log('WDB Show Credits:', $form.find('input[name="show_credits"]').is(':checked'));
+
             $.ajax({
                 url: wdb_admin_vars.ajax_url,
                 type: 'POST',
-                data: $form.serialize() + '&action=wdb_save_settings',
+                data: formData + '&action=wdb_save_settings',
                 success: function(response) {
                     if (response.success) {
                         self.showMessage('#wdb-settings-message', response.data.message, 'success');
